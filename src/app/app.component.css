@@ -1,0 +1,11 @@
+.navbar {
+    margin-bottom: 0px;
+}
+
+.resize {
+    width: 100%;
+}
+.modal-backdrop {
+    /* bug fix - no overlay */    
+    display: none;    
+}

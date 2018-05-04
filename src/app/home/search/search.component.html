@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+        <form class="form-horizontal" [formGroup]="miniSearchForm" role="form">
+
+            <h3 style="text-align: center; margin-top: 10px">Find your favorite place in the world</h3>
+            <p style="text-align: center;">From comfortable village houses to chic city flats</p>
+            <hr>
+
+            <div class="row">
+                <div class="form-group col-md-3 col-xs-3 col-sm-3" style="margin-left: 25px; margin-right: 5px">
+                    <label class="control-label" for="textinput">City</label>
+                    <div>
+                        <input formControlName="city" type="text" class="form-control border-input" id="city" placeholder="City">
+                    </div>
+                    <small id="city" *ngIf="!miniSearchForm.get('city').valid && miniSearchForm.get('city').touched" class="text-danger text-muted">Invalid value</small>
+                </div>
+
+                <div class="form-group col-md-4 col-xs-4 col-sm-4" style="margin-left: 5px; margin-right: 5px">
+                    <label>Date</label>
+                    <input formControlName="date" class="form-control border-input" id="date" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+                        placeholder="Date" [selectMode]="'range'">
+                    <owl-date-time #dt3></owl-date-time>
+                    <small id="date" *ngIf="!miniSearchForm.get('date').valid && miniSearchForm.get('date').touched" class="text-danger text-muted">Invalid value</small>
+                </div>
+
+                <div class="form-group col-md-2 col-xs-2 col-sm-2" style="margin-left: 5px; margin-right: 5px">
+                    <label class=" control-label " for="textinput ">Number of people</label>
+                    <div>
+                        <input formControlName="numberOfPeople" type="text " class="form-control border-input " id="numberOfPeople" placeholder="Number of people ">
+                    </div>
+                    <small id="numberOfPeople" *ngIf="!miniSearchForm.get( 'numberOfPeople').valid && miniSearchForm.get(
+                    'numberOfPeople').touched " class="text-danger text-muted ">Invalid value</small>
+                </div>
+
+                <div class="btn-group col-md-1 col-xs-1 col-sm-1" role="group" style="margin-top: 27px">
+                    <button type="button" class="btn btn-primary " data-dismiss="modal " role="button ">Search
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="row">
+                <a class="text-primary text-muted pull-right small" style="margin-right: 120px; cursor: pointer;">More</a>
+            </div>
+        </form>
+    </div>
+</div>
