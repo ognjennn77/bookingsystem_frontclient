@@ -14,10 +14,10 @@ export class SearchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.initScreening();
+    this.initSearch();
   }
 
-  initScreening() {
+  initSearch() {
     this.miniSearchForm = new FormGroup({
       'city': new FormControl(null, [Validators.required]),
       'date': new FormControl(null, [Validators.required]),

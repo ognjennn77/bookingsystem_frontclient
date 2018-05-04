@@ -10,6 +10,7 @@ import { ThumbnailAccommodationComponent } from './home/display/thumbnail-accomm
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdvanceSearchComponent } from './home/search/advance-search/advance-search.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     SearchComponent,
     DisplayComponent,
-    ThumbnailAccommodationComponent
+    ThumbnailAccommodationComponent,
+    AdvanceSearchComponent
   ],
   imports: [
     BrowserModule,

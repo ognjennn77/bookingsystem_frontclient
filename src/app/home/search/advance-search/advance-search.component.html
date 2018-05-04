@@ -1,0 +1,68 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" #searchClose>
+        <span arial-hidden="true">x</span>
+      </button>
+      <h3 class="modal-title">Advance search</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+          <form class="form-horizontal" [formGroup]="advanceSearchForm" role="form">
+
+            <div class="form-group">
+              <label class="control-label" for="textinput">City</label>
+              <div>
+                <input formControlName="city" type="text" class="form-control border-input" id="city" placeholder="City">
+              </div>
+              <small id="city" *ngIf="!advanceSearchForm.get('city').valid && advanceSearchForm.get('city').touched" class="text-danger text-muted">Invalid value</small>
+            </div>
+
+            <div class="form-group">
+              <label>Date</label>
+              <input formControlName="date" class="form-control border-input" id="date" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+                placeholder="Date" [selectMode]="'range'">
+              <owl-date-time #dt3></owl-date-time>
+              <small id="date" *ngIf="!advanceSearchForm.get('date').valid && advanceSearchForm.get('date').touched" class="text-danger text-muted">Invalid value</small>
+            </div>
+
+            <div class="form-group">
+              <label class=" control-label " for="textinput ">Number of people</label>
+              <div>
+                <input formControlName="numberOfPeople" type="text " class="form-control border-input " id="numberOfPeople" placeholder="Number of people ">
+              </div>
+              <small id="numberOfPeople" *ngIf="!advanceSearchForm.get( 'numberOfPeople').valid && advanceSearchForm.get(
+                  'numberOfPeople').touched " class="text-danger text-muted ">Invalid value</small>
+            </div>
+
+
+            <!-- FOR za listu dodatnih usluga kao checkbox -->
+            <div class="form-group">
+              <label>Price for Regugular Seat</label>
+              <!-- <input type="checkbox" formControlName="servicelatest" [value]="CatArry[i].id" (change)="serviceCheckBox($event)" /> -->
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
+        </div>
+        <div *ngIf="!edit" class="btn-group" role="group">
+          <button type="button" (click)="newScreening()" [disabled]="!screeningForm.valid" id="saveImage" class="btn btn-default btn-hover-green"
+            data-action="save" role="button">Save</button>
+        </div>
+        <div *ngIf="edit" class="btn-group" role="group">
+          <button type="button" (click)="editSaveScreening()" [disabled]="!screeningForm.valid" id="editImage" class="btn btn-default btn-hover-green"
+            data-action="save" role="button">Edit</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
