@@ -28,12 +28,12 @@ export class PaginationService {
         let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
         // niz brojeva starnica
-        let pages = new Array(); 
+        let pages = new Array();
         let i;
-        for( i = startPage;  i < endPage+1; i++){
+        for (i = startPage; i < endPage + 1; i++) {
             pages.push(i);
         }
-        
+
         return {
             currentPage: currentPage,
             totalPages: totalPages,

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Accommodation } from '../../model/accommodation.model';
+import { ActivatedRoute, Data } from '@angular/router';
+import { DisplayService } from './display.service';
 
 @Component({
   selector: 'app-display',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayComponent implements OnInit {
 
-  constructor() { }
+  accommodations: Accommodation[];
+  totalNumber: number;
+
+  constructor(private homeService: DisplayService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(
+      (data: Data) => {
 
+        this.accommodations = data.dispayResolver.accommodations;
+        this.totalNumber = data.dispayResolver.totalNumber;
+
+      }
+    )
   }
 }

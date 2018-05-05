@@ -53,13 +53,8 @@
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
         </div>
-        <div *ngIf="!edit" class="btn-group" role="group">
-          <button type="button" (click)="newScreening()" [disabled]="!screeningForm.valid" id="saveImage" class="btn btn-default btn-hover-green"
-            data-action="save" role="button">Save</button>
-        </div>
-        <div *ngIf="edit" class="btn-group" role="group">
-          <button type="button" (click)="editSaveScreening()" [disabled]="!screeningForm.valid" id="editImage" class="btn btn-default btn-hover-green"
-            data-action="save" role="button">Edit</button>
+        <div class="btn-group" role="group">
+          <button type="button" [disabled]="!advanceSearchForm.valid" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
         </div>
       </div>
     </div>

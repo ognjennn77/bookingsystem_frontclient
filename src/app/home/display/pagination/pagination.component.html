@@ -2,31 +2,20 @@
 <div class="text-center">
     <ul *ngIf="pager.pages && pager.pages.length " class="pagination">
         <li *ngIf="!(pager.currentPage === 1)">
-            <a [routerLink] = "['/home']"
-               [queryParams] = "{page: '1'}" 
-               (click)="setPage(1)" 
-               >First</a>
+            <a [routerLink]="['/home']" [queryParams]="{page: '1'}" (click)="setPage(1)">First</a>
         </li>
         <li *ngIf="!(pager.currentPage === 1)">
-            <a  [routerLink] = "['/home']"
-                [queryParams] = "{page:pager.currentPage - 1}" 
-                (click)="setPage(pager.currentPage - 1)">Previous</a>
+            <a [routerLink]="['/home']" [queryParams]="{page:pager.currentPage - 1}" (click)="setPage(pager.currentPage - 1)">Previous</a>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-            <a  [routerLink] = "['/home']"
-                [queryParams] = "{page:page}" 
-                (click)="setPage(page)">{{page}}</a>
+            <a [routerLink]="['/home']" [queryParams]="{page:page}" (click)="setPage(page)">{{page}}</a>
         </li>
         <li *ngIf="!(pager.currentPage === pager.totalPages)">
-            <a  [routerLink] = "['/home']"
-                [queryParams] = "{page:pager.currentPage + 1}" 
-                (click)="setPage(pager.currentPage + 1)">Next</a>
+            <a [routerLink]="['/home']" [queryParams]="{page:pager.currentPage + 1}" (click)="setPage(pager.currentPage + 1)">Next</a>
         </li>
         <li *ngIf="!(pager.currentPage === pager.totalPages)">
-            <a  [routerLink] = "['/home']"
-                [queryParams] = "{page:pager.totalPages}" 
-                (click)="setPage(pager.totalPages)">Last</a>
+            <a [routerLink]="['/home']" [queryParams]="{page:pager.totalPages}" (click)="setPage(pager.totalPages)">Last</a>
         </li>
     </ul>
-    
+
 </div>

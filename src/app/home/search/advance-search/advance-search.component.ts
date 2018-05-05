@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-advance-search',
@@ -18,9 +18,9 @@ export class AdvanceSearchComponent implements OnInit {
 
   initSearch() {
     this.advanceSearchForm = new FormGroup({
-      // 'city': new FormControl(null, [Validators.required]),
-      // 'date': new FormControl(null, [Validators.required]),
-      // 'numberOfPeople': new FormControl(null, [Validators.required]),
+      'city': new FormControl(null, [Validators.required]),
+      'date': new FormControl(null, [Validators.required]),
+      'numberOfPeople': new FormControl(null, [Validators.required]),
     })
   }
 
