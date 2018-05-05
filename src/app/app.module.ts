@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdvanceSearchComponent } from './home/search/advance-search/advance-search.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AdvanceSearchComponent } from './home/search/advance-search/advance-sea
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     BrowserAnimationsModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
