@@ -40,12 +40,31 @@
 
             </div>
             <div class="row">
-                <a class="text-primary text-muted pull-right small" style="margin-right: 120px; cursor: pointer;" data-toggle="modal" data-target="#advanceSearch">More</a>
+                <a class="text-primary text-muted pull-right small" style="margin-right: 120px; cursor: pointer;" (click)="showAdvanceSearch()">Advance search</a>
+            </div>
+
+            <div [hidden]="advanceSearch" class="row">
+                <div class="form-group col-md-2 col-xs-2 col-sm-2" style="margin-left: 25px; margin-right: 5px">
+                    <label class=" control-label " for="textinput ">Accommodation Category</label>
+                    <div>
+                        <!-- Accommodation Category checkbox -->
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2 col-xs-2 col-sm-2" style="margin-left: 5px; margin-right: 5px">
+                    <label class=" control-label " for="textinput ">Accommodation Type</label>
+                    <div>
+                        <!-- Accommodation Type checkbox -->
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2 col-xs-2 col-sm-2" style="margin-left: 5px; margin-right: 5px">
+                    <label class=" control-label " for="textinput ">Additional Services</label>
+                    <div>
+                        <!-- AdditionalServices checkbox -->
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div class="modal fade" id="advanceSearch" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <app-advance-search></app-advance-search>
 </div>

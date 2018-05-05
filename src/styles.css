@@ -1,2 +1,26 @@
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.modal-backdrop {
+    z-index: -100;
+    
+  }
+   .modal {
+    text-align: center;
+  }
+/*   
+  @media screen and (min-width: 768px) { 
+    .modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  } */
+  
+  .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+  } 
+

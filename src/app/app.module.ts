@@ -14,7 +14,6 @@ import { DisplayService } from './home/display/display.service';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccommodationProfileComponent } from './home/accommodation-profile/accommodation-profile.component';
-import { AdvanceSearchComponent } from './home/search/advance-search/advance-search.component';
 import { PaginationComponent } from './home/display/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap';
@@ -27,7 +26,6 @@ import { ModalModule } from 'ngx-bootstrap';
     DisplayComponent,
     SearchComponent,
     AccommodationProfileComponent,
-    AdvanceSearchComponent,
     ThumbnailAccommodationComponent,
     PaginationComponent,
     DisplayComponent

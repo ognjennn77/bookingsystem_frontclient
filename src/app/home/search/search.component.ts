@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -8,8 +9,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SearchComponent implements OnInit {
 
-  show: Boolean = true;
+  advanceSearch: Boolean = true;
   miniSearchForm: FormGroup;
+
+  // polja za AccommodationCategory/Type i AdditionalServices 
 
   constructor() { }
 
@@ -23,6 +26,10 @@ export class SearchComponent implements OnInit {
       'date': new FormControl(null, [Validators.required]),
       'numberOfPeople': new FormControl(null, [Validators.required]),
     })
+  }
+
+  showAdvanceSearch() {
+    this.advanceSearch = !this.advanceSearch;
   }
 
 
