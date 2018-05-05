@@ -17,6 +17,7 @@ import { AccommodationProfileComponent } from './home/accommodation-profile/acco
 import { AdvanceSearchComponent } from './home/search/advance-search/advance-search.component';
 import { PaginationComponent } from './home/display/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
   ],
   providers: [DisplayResolver, DisplayService],
   bootstrap: [AppComponent]
