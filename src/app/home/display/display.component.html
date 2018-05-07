@@ -1,10 +1,21 @@
 <div class="container">
-    <div class="row" style="margin-top: 20px">
-        <app-thumbnail-accommodation *ngFor="let accommodation of accommodations" [accommodation]="accommodation"></app-thumbnail-accommodation>
+
+    <div class="row  styled-select slate" style="margin-top: 20px">
+        <select name="" id="">
+            <option value="">Price
+                <i class="glyphicon glyphicon-arrow-up"></i>
+            </option>
+            <option value="">Category</option>
+            <option value="">Rating</option>
+        </select>
     </div>
-    <!-- <div class="row">
+
+    <div class="row" style="margin-top: 25px">
+        <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:0:3" [accommodation]="accommodation"></app-thumbnail-accommodation>
+    </div>
+    <div class="row">
         <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:4:8" [accommodation]="accommodation"></app-thumbnail-accommodation>
-    </div> -->
+    </div>
     <div class="row">
         <app-pagination [totalNumber]="totalNumber"></app-pagination>
     </div>

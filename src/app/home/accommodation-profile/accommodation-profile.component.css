@@ -2,7 +2,7 @@
 /*****************globals*************/
 body {
     font-family: 'open sans';
-    overflow-x: hidden; }
+    overflow-x: hidden}
   
   img {
     max-width: 100%; }
@@ -81,7 +81,7 @@ body {
         -ms-flex-positive: 1;
             flex-grow: 1; }
   
-  .title, .people, .colors {
+  .title, .people, {
     text-transform: UPPERCASE;
     font-weight: bold; }
   
@@ -90,9 +90,15 @@ body {
 
   .title, .rating, .description, .people, .category,  {
     margin-bottom: 15px; }
+
+  .description {
+    color: #0076ad;
+    font-weight: bold;
+  }
   
   .title {
-    margin-top: 0; }
+    margin-top: 0;
+  text-align: center; }
   
   .color {
     display: inline-block;

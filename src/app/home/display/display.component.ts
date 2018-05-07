@@ -20,10 +20,8 @@ export class DisplayComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
 
-        this.accommodations = data.dispayResolver.accommodations;
-        this.totalNumber = data.dispayResolver.totalNumber;
-
-        console.log(this.accommodations)
+        this.accommodations = data.displayResolver.accommodations;
+        this.totalNumber = data.displayResolver.totalNumber;
       }
     )
   }

@@ -1,26 +1,25 @@
 <div class="col-sm-3 col-lg-3 col-md-3">
-  <div class="thumbnail" *ngIf="accomoodation">
+  <div class="thumbnail" *ngIf="accommodation">
     <img class="img-responsive" [src]="previewImage">
     <div class="caption">
-      <h4 class="pull-right">Tip Smestaja</h4>
-      <h4>
-        <a>{{accomoodation?.name}}</a>
-      </h4>
-      <p>{{ (accomoodation?.description.length > 60)? (accomoodation?.description | slice:0:60)+'..':(accomoodation?.description)
+      <h3 style=" text-align: center">
+        <a style="cursor: pointer" routerLink="{{accommodation?.id}}">{{accommodation?.name}}</a>
+      </h3>
+      <p>{{ (accommodation?.description.length > 60)? (accommodation?.description | slice:0:60)+'..':(accommodation?.description)
         }}
       </p>
     </div>
     <div class="address">
-      <p>Address: {{accomoodation?.address}}</p>
+      <p>Address: {{accommodation?.address}}</p>
     </div>
-    <!-- <div class="ratings">
-        <p class="pull-right">12 reviews</p>
+    <!-- <div class="ratings ">
+        <p class="pull-right ">12 reviews</p>
         <p>
-          <span class="glyphicon glyphicon-star"></span>
-          <span class="glyphicon glyphicon-star"></span>
-          <span class="glyphicon glyphicon-star"></span>
-          <span class="glyphicon glyphicon-star"></span>
-          <span class="glyphicon glyphicon-star-empty"></span>
+          <span class="glyphicon glyphicon-star "></span>
+          <span class="glyphicon glyphicon-star "></span>
+          <span class="glyphicon glyphicon-star "></span>
+          <span class="glyphicon glyphicon-star "></span>
+          <span class="glyphicon glyphicon-star-empty "></span>
         </p>
       </div> -->
   </div>

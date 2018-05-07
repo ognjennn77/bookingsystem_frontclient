@@ -17,7 +17,9 @@ import { AccommodationProfileComponent } from './home/accommodation-profile/acco
 import { PaginationComponent } from './home/display/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap';
-
+import { SearchService } from './home/search/search.service';
+import { AccommodationProfileService } from './home/accommodation-profile/accommodation-profile.service';
+import { AccommodationProfileResolver } from './home/accommodation-profile/accommodation-profile-resolver.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,7 @@ import { ModalModule } from 'ngx-bootstrap';
     SearchComponent,
     AccommodationProfileComponent,
     ThumbnailAccommodationComponent,
-    PaginationComponent,
-    DisplayComponent
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,7 @@ import { ModalModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     ModalModule.forRoot(),
   ],
-  providers: [DisplayResolver, DisplayService],
+  providers: [DisplayResolver, DisplayService, SearchService, AccommodationProfileService, AccommodationProfileResolver],
   bootstrap: [AppComponent]
 })
 

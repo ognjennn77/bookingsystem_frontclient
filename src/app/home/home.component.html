@@ -1,15 +1,13 @@
 <div class="container-fluid">
   <div class="row">
+
     <div class="sidebar" data-background-color="black" data-active-color="danger">
       <app-search></app-search>
     </div>
+
     <div class="main-panel">
-      <div>
-        <app-display></app-display>
-      </div>
-      <div>
-        <app-accommodation-profile></app-accommodation-profile>
-      </div>
+      <router-outlet></router-outlet>
     </div>
+
   </div>
 </div>

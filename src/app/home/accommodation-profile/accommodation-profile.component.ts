@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
+import { AccommodationProfileService } from './accommodation-profile.service';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-accommodation-profile',
@@ -8,12 +10,18 @@ import { Accommodation } from '../../model/accommodation.model';
 })
 export class AccommodationProfileComponent implements OnInit {
 
-  accommodation: Accommodation;
+  private accommodation: Accommodation;
 
-
-  constructor() { }
+  constructor(private route: ActivatedRoute, private accommodationProfileService: AccommodationProfileService) { }
 
   ngOnInit() {
+    this.route.data.subscribe(
+      (data: Data) => {
+
+        this.accommodation = data.accommodationProfileResolver[0];
+        console.log(this.accommodation)
+      }
+    )
   }
 
 }

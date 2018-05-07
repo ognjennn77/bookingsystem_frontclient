@@ -51,7 +51,9 @@
 
       </div>
       <div class="details col-md-6">
+
         <h3 class="title">{{accommodation?.name}}</h3>
+        <br>
         <!-- <div class="rating">
           <div class="stars">
             <span class="fa fa-star checked"></span>
@@ -62,24 +64,32 @@
           </div>
           <span class="review-no">41 reviews</span>
         </div> -->
-        <p class="description">{{accommodation?.description}}</p>
-        <p class="people">Availabel for: {{accommodation?.numberOfPeople}} person
+        <p class="description" style="color:brown">{{accommodation?.address}}</p>
+        <p class="description">{{ (accommodation?.description.length > 100)? (accommodation?.description | slice:0:100)+'..':(accommodation?.description)
+          }}
+        </p>
+        <p class="description">Available for: {{accommodation?.numberOfPeople}} person
         </p>
         <p class="category">
           <strong>{{accommodation?.accommodationType}}</strong>
           <strong>{{accommodation?.accommodationCategory}}</strong>
         </p>
         <!-- DODATNE USLUGE -->
-        <h5 class="colors">colors:
-          <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-          <span class="color green"></span>
-          <span class="color blue"></span>
+        <h5 *ngIf="accommodation.additionalServices.length" class="colors">AdditionalServices:
+          <span ngFor="let service of accommodation.additionalServices">{{service}}</span>&nbsp;
         </h5>
+
+        <div class="form-group">
+          <input [owlDateTimeTrigger]="dt3" class="form-control" [owlDateTime]="dt3" placeholder="Date" [selectMode]="'range'">
+          <owl-date-time #dt3></owl-date-time>
+        </div>
+
         <div class="action">
           <button class="add-to-cart btn btn-default" type="button">Reserv
             <span class="fa fa-heart"></span>
           </button>
         </div>
+
       </div>
     </div>
     <!-- </div> -->
