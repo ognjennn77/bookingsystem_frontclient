@@ -34,16 +34,37 @@ export class DisplayResolver implements Resolve<returnValue> {
                 console.log(response.text())
                 let accommodations: Accommodation[] = null;
 
-                let parseString = require('xml2js').parseString;
+                //let parseString = require('xml2js').parseString;
 
-                parseString(response.text(), function (err, result) {
-                    console.log(result);
+                // parseString(response.text(), function (err, result) {
+                //     console.log(result);
+                //     accommodations = result;
+                // });
+
+                xml2js.parseString(response.text(), function (err, result) {
+                    console.dir(result); // Prints JSON object!
                     accommodations = result;
-                });
+                })
 
+                // var options = {
+                //     object: false,
+                //     reversible: false,
+                //     coerce: false,
+                //     sanitize: true,
+                //     trim: true,
+                //     arrayNotation: false,
+                //     alternateTextNode: false
+                // };
+
+                // var parser = require('xml2json');
+                // var json = parser.toJson(response, options);
+                // console.log("to json -> %s", json);
+
+                // accommodations = response.json();
 
                 let ret: returnValue = { totalNumber, accommodations }
                 return ret;
             });
     }
+
 }

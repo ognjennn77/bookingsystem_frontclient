@@ -10,7 +10,7 @@ import { DisplayService } from './display.service';
 })
 export class DisplayComponent implements OnInit {
 
-  accommodations: Accommodation[];
+  accommodations: Array<Accommodation>;
   totalNumber: number;
 
   constructor(private homeService: DisplayService,
@@ -23,6 +23,7 @@ export class DisplayComponent implements OnInit {
         this.accommodations = data.dispayResolver.accommodations;
         this.totalNumber = data.dispayResolver.totalNumber;
 
+        console.log(this.accommodations)
       }
     )
   }
