@@ -25,4 +25,17 @@ export class DisplayComponent implements OnInit {
       }
     )
   }
+
+  sort(type: String) {
+    let currentPage = this.route.queryParams['page'];
+    let nextPage = +currentPage + 1;
+    if (!(currentPage == NaN)) {
+      nextPage = 1;
+    }
+    this.homeService.getSorted(type, nextPage, 8).subscribe(
+      (response) => {
+        console.log(response.json())
+      }
+    )
+  }
 }

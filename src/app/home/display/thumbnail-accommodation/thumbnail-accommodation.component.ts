@@ -20,7 +20,7 @@ export class ThumbnailAccommodationComponent implements OnInit {
 
   private showPic(): void {
 
-    if (this.accommodation.images[0] && this.accommodation.images[0].image) {
+    if (this.accommodation.images && this.accommodation.images[0] && this.accommodation.images[0].image) {
       this.previewImage = `data:image/jpeg;base64,${this.accommodation.images[0].image}`
       return
     }

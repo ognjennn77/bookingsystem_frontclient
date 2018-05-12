@@ -18,4 +18,8 @@ export class SearchService {
     getAccommodationType() {
         return this.http.get('http://localhost:8080/api/accommodationType');
     }
+
+    getSearch(formData: FormData) {
+        return this.http.post('http://localhost:8080/api/accommodation/search', formData);
+    }
 }

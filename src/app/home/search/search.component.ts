@@ -4,7 +4,7 @@ import { SearchService } from './search.service';
 import { AdditionalServices } from '../../model/additionalServices.model';
 import { AccommodationCategory } from '../../model/accommodationCategory.model';
 import { AccommodationType } from '../../model/accommodationType.model';
-
+import { IMyDrpOptions } from 'mydaterangepicker';
 
 @Component({
   selector: 'app-search',
@@ -19,6 +19,17 @@ export class SearchComponent implements OnInit {
   private additionalServices: AdditionalServices[];
   private accommodationCategory: AccommodationCategory[];
   private accommodationType: AccommodationType[];
+
+  private checkedServices: string[] = [];
+  private checkedCategory: string[] = [];
+  private checkedType: string[] = [];
+
+  private myDateRangePickerOptions: IMyDrpOptions = {
+    dateFormat: 'dd.mm.yyyy',
+    sunHighlight: true,
+    markCurrentDay: true,
+    openSelectorOnInputClick: true
+  };
 
   constructor(private searchService: SearchService) { }
 
@@ -40,7 +51,61 @@ export class SearchComponent implements OnInit {
 
   showAdvanceSearch() {
     this.advanceSearch = !this.advanceSearch;
+  }
 
+  searchData() {
+    let formData: FormData = new FormData();
+
+    let date = this.miniSearchForm.get('date').value;
+
+    if (date) {
+      formData.append('beginDate', date.beginDate),
+        formData.append('endDate', date.endDate)
+    }
+    formData.append('city', this.miniSearchForm.get('city').value),
+      formData.append('numberOfPeople', this.miniSearchForm.get('numberOfPeople').value)
+
+    for (let service of this.checkedServices) {
+      formData.append('additionalServices', service)
+    }
+    for (let category of this.checkedCategory) {
+      formData.append('accommodationCategory', category)
+    }
+    for (let type of this.checkedType) {
+      formData.append('accommodationType', type)
+    }
+
+    // this.searchService.getSearch(formData).subscribe(
+    //   (response) => {
+    //     console.log(response.json())
+    //   }
+    // )
+
+    console.log(formData)
+  }
+
+  selectCategory(e, category: AccommodationCategory) {
+    if (e.target.checked) {
+      this.checkedCategory.push(category.name)
+    } else {
+      this.checkedCategory.splice(this.checkedCategory.indexOf(category.name), 1);
+    }
+  }
+
+  selectType(e, type: AccommodationType) {
+    if (e.target.checked) {
+      this.checkedType.push(type.name)
+    } else {
+      this.checkedType.splice(this.checkedType.indexOf(type.name), 1);
+    }
+  }
+
+  selectServices(e, service: AdditionalServices) {
+    if (e.target.checked) {
+      this.checkedServices.push(service.name)
+    } else {
+      this.checkedServices.splice(this.checkedServices.indexOf(service.name), 1);
+    }
   }
 
   getAdditionasServices() {
@@ -66,5 +131,4 @@ export class SearchComponent implements OnInit {
       }
     )
   }
-
 }

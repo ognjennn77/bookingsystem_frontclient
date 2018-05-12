@@ -34,6 +34,7 @@ export class DisplayResolver implements Resolve<returnValue> {
 
                 let accommodations: Accommodation[] = response.json();
 
+                //  console.log(accommodations)
                 let ret: returnValue = { totalNumber, accommodations }
                 return ret;
             });

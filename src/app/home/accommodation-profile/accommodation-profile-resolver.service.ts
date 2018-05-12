@@ -19,7 +19,6 @@ export class AccommodationProfileResolver implements Resolve<Accommodation> {
 
     constructor(private accommodationProfileService: AccommodationProfileService) { }
 
-
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Accommodation | Observable<Accommodation> | Promise<Accommodation> {
 
         let id = route.params['id'];

@@ -10,4 +10,9 @@ export class AccommodationProfileService {
     getAccommodation(id: number) {
         return this.http.get('http://localhost:8080/api/accommodation?id=' + id);
     }
+
+    getBusyTerminsFromAccommodationId(id: number) {
+        console.log(id)
+        return this.http.get('http://localhost:8080/api/reservation/search?idAccommodation=' + id);
+    }
 }

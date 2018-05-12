@@ -10,4 +10,8 @@ export class DisplayService {
     getAccommodations(page: number, size: number) {
         return this.http.get('http://localhost:8080/api/accommodation?page=' + page + '&size=' + size);
     }
+
+    getSorted(type: String, page: number, size: number) {
+        return this.http.get('http://localhost:8080/api/accommodation/sort?type=' + type + 'page=' + page + '&size=' + size);
+    }
 }

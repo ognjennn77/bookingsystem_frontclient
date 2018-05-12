@@ -20,6 +20,8 @@ import { ModalModule } from 'ngx-bootstrap';
 import { SearchService } from './home/search/search.service';
 import { AccommodationProfileService } from './home/accommodation-profile/accommodation-profile.service';
 import { AccommodationProfileResolver } from './home/accommodation-profile/accommodation-profile-resolver.service';
+import { MyDatePickerModule } from 'mydatepicker';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AccommodationProfileResolver } from './home/accommodation-profile/accom
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    MyDatePickerModule,
+    MyDateRangePickerModule
   ],
   providers: [DisplayResolver, DisplayService, SearchService, AccommodationProfileService, AccommodationProfileResolver],
   bootstrap: [AppComponent]

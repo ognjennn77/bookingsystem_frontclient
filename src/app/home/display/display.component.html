@@ -1,12 +1,12 @@
 <div class="container">
 
     <div class="row  styled-select slate" style="margin-top: 20px">
-        <select name="" id="">
-            <option value="">Price
+        <select name="" id="" (change)="sort($event.target.value)">
+            <option value="price">Price
                 <i class="glyphicon glyphicon-arrow-up"></i>
             </option>
-            <option value="">Category</option>
-            <option value="">Rating</option>
+            <option value="category">Category</option>
+            <option value="rating">Rating</option>
         </select>
     </div>
 
