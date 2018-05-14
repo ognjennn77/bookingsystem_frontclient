@@ -38,19 +38,28 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-        <form role="form">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
-              </div>
-          </form>
+    <div *ngIf="isLoginError" class="red-text center error-message">
+      <i class="material-icons">error</i> Incorrect username or password
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary btn-block">Log In</button>
+  <form #loginForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+     <div class="row">
+       <div class="input-field col s12">
+         <i class="material-icons prefix">account_circle</i>
+         <input type="text" #UserName ngModel name="UserName" placeholder="Username" required>
+       </div>
+     </div>
+     <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <input type="password" #Password ngModel name="Password" placeholder="Password" required>
+        </div>
       </div>
+      <div class="row">
+          <div class="input-field col s12">
+            <button [disabled]="!loginForm.valid" class="btn-large btn-submit" type="submit">Login</button>
+          </div>
+        </div>
+  </form>
 </ng-template>
 
 
@@ -62,33 +71,41 @@
       </button>
   </div>
   <div class="modal-body">
-      <form role="form">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username">
-          </div>
-          <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="E-Mail">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="First name">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Second name">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="City">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Phone number">
-            </div>
-        </form>
+    <form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+      <div class="row">
+        <div class="input-field col s6">
+          <input class="validate" type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName" required>
+          <label data-error="Required field!">UserName</label>
+        </div>
+        <div class="input-field col s6">
+          <input class="validate" type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password" required minlength="3">
+          <label [attr.data-error]="Password.errors!=null?(Password.errors.required?'Required field!':'Minimum 3 characters needed'):''">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
+          <label data-error="Invalid email!">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="user.FirstName">
+          <label>First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="user.LastName">
+          <label>Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button [disabled]="!userRegistrationForm.valid" class="btn-large btn-submit" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="modal-footer">
-      <button class="btn btn-primary btn-block">Sign Up</button>
-    </div>
+  
 </ng-template>
 
 
