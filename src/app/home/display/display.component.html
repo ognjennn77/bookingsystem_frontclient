@@ -10,10 +10,10 @@
         </select>
     </div>
 
-    <div class="row" style="margin-top: 25px">
+    <div *ngIf="accommodations" class="row" style="margin-top: 25px">
         <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:0:3" [accommodation]="accommodation"></app-thumbnail-accommodation>
     </div>
-    <div class="row">
+    <div *ngIf="accommodations" class="row">
         <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:4:8" [accommodation]="accommodation"></app-thumbnail-accommodation>
     </div>
     <div class="row">

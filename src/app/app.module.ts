@@ -22,6 +22,7 @@ import { AccommodationProfileService } from './home/accommodation-profile/accomm
 import { AccommodationProfileResolver } from './home/accommodation-profile/accommodation-profile-resolver.service';
 import { MyDatePickerModule } from 'mydatepicker';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
+import { HomeService } from './home/home.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,9 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
     MyDatePickerModule,
     MyDateRangePickerModule
   ],
-  providers: [DisplayResolver, DisplayService, SearchService, AccommodationProfileService, AccommodationProfileResolver],
+  providers: [DisplayResolver, DisplayService, SearchService,
+    AccommodationProfileService, AccommodationProfileResolver,
+    HomeService],
   bootstrap: [AppComponent]
 })
 
