@@ -23,9 +23,9 @@ export class DisplayResolver implements Resolve<returnValue> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): returnValue | Observable<returnValue> | Promise<returnValue> {
 
         let currentPage = route.queryParams['page'];
-        let nextPage = +currentPage + 1;
-        if (!(currentPage == NaN)) {
-            nextPage = 1;
+        let nextPage = +currentPage - 1;
+        if (isNaN(nextPage)) {
+            nextPage = 0;
         }
 
         return this.displayService.getAccommodations(nextPage, 8)
@@ -34,7 +34,6 @@ export class DisplayResolver implements Resolve<returnValue> {
 
                 let accommodations: Accommodation[] = response.json();
 
-                //  console.log(accommodations)
                 let ret: returnValue = { totalNumber, accommodations }
                 return ret;
             });

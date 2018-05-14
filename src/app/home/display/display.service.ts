@@ -11,7 +11,7 @@ export class DisplayService {
         return this.http.get('http://localhost:8080/api/accommodation?page=' + page + '&size=' + size);
     }
 
-    getSorted(type: String, page: number, size: number) {
-        return this.http.get('http://localhost:8080/api/accommodation/sort?type=' + type + 'page=' + page + '&size=' + size);
+    getSorted(type: String, formData: FormData, page: number, size: number) {
+        return this.http.post('http://localhost:8080/api/accommodation/sort?type=' + type + '&page=' + page + '&size=' + size, formData);
     }
 }

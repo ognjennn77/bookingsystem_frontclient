@@ -11,7 +11,7 @@
     </div>
 
     <div *ngIf="accommodations" class="row" style="margin-top: 25px">
-        <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:0:3" [accommodation]="accommodation"></app-thumbnail-accommodation>
+        <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:0:4" [accommodation]="accommodation"></app-thumbnail-accommodation>
     </div>
     <div *ngIf="accommodations" class="row">
         <app-thumbnail-accommodation *ngFor="let accommodation of accommodations | slice:4:8" [accommodation]="accommodation"></app-thumbnail-accommodation>

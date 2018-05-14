@@ -8,16 +8,17 @@ import { Subject } from "rxjs/Rx";
 @Injectable()
 export class HomeService {
 
-    accommodationList: Accommodation[] = [];
+    private accommodationList: Accommodation[] = [];
     accommodationSubject = new Subject<Accommodation[]>();
 
-    formData: FormData;
+    private formData: FormData = new FormData();
 
     constructor(private http: Http) { }
 
     setAccommodations(accommodations: Accommodation[]) {
         this.accommodationList = accommodations;
-        this.accommodationSubject.next(this.accommodationList.slice());
+        if (this.accommodationList)
+            this.accommodationSubject.next(this.accommodationList.slice());
     }
 
     getAccommodations() {

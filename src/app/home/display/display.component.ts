@@ -25,6 +25,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.accommodations = data.displayResolver.accommodations;
         this.totalNumber = data.displayResolver.totalNumber;
         this.homeService.setAccommodations(this.accommodations);
+        console.log(this.accommodations)
       }
     )
     this.subscription = this.homeService.accommodationSubject.subscribe(
@@ -38,13 +39,15 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  sort(type: String) {
+  sort(sort: String) {
+    console.log(sort)
     let currentPage = this.route.queryParams['page'];
-    let nextPage = +currentPage + 1;
-    if (!(currentPage == NaN)) {
-      nextPage = 1;
+    let nextPage = +currentPage - 1;
+    if (isNaN(nextPage)) {
+      nextPage = 0;
     }
-    this.displayService.getSorted(type, nextPage, 8).subscribe(
+    let formData: FormData = this.homeService.getFormData();
+    this.displayService.getSorted(sort, formData, nextPage, 8).subscribe(
       (response) => {
         console.log(response.json())
       }

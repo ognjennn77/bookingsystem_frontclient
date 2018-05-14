@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
-      { path: '', component: DisplayComponent, resolve: { displayResolver: DisplayResolver } },
+      { path: '', component: DisplayComponent, runGuardsAndResolvers: 'paramsOrQueryParamsChange', resolve: { displayResolver: DisplayResolver } },
       { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver } },
     ]
   },
