@@ -5,6 +5,9 @@ import { AdditionalServices } from '../../model/additionalServices.model';
 import { AccommodationCategory } from '../../model/accommodationCategory.model';
 import { AccommodationType } from '../../model/accommodationType.model';
 import { IMyDrpOptions } from 'mydaterangepicker';
+import { HomeComponent } from '../home.component';
+import { HomeService } from '../home.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -31,7 +34,8 @@ export class SearchComponent implements OnInit {
     openSelectorOnInputClick: true
   };
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private homeSeervice: HomeService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initSearch();
@@ -62,7 +66,9 @@ export class SearchComponent implements OnInit {
       formData.append('beginDate', date.beginDate),
         formData.append('endDate', date.endDate)
     }
-    formData.append('city', this.miniSearchForm.get('city').value),
+    if (this.miniSearchForm.get('city').value)
+      formData.append('city', this.miniSearchForm.get('city').value)
+    if (this.miniSearchForm.get('numberOfPeople').value)
       formData.append('numberOfPeople', this.miniSearchForm.get('numberOfPeople').value)
 
     for (let service of this.checkedServices) {
@@ -75,13 +81,13 @@ export class SearchComponent implements OnInit {
       formData.append('accommodationType', type)
     }
 
-    // this.searchService.getSearch(formData).subscribe(
-    //   (response) => {
-    //     console.log(response.json())
-    //   }
-    // )
+    this.homeSeervice.setFormData(formData);
 
-    console.log(formData)
+    this.searchService.getSearch(formData).subscribe(
+      (response) => {
+        this.homeSeervice.setAccommodations(response.json())
+      }
+    )
   }
 
   selectCategory(e, category: AccommodationCategory) {
@@ -131,4 +137,5 @@ export class SearchComponent implements OnInit {
       }
     )
   }
+
 }
