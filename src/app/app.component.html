@@ -83,9 +83,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
           <input class="validate" type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email" [pattern]="emailPattern">
           <label data-error="Invalid email!">Email</label>
+        </div>
+        <div class="input-field col s6">
+          <input class="validate" type="text" name="Phone" #Phone="ngModel" [(ngModel)]="user.Phone" [pattern]="phonePattern">
+          <label data-error="Invalid phone!">Phone</label>
         </div>
       </div>
       <div class="row">
