@@ -32,7 +32,7 @@ import { HomeService } from './home/home.service';
     SearchComponent,
     AccommodationProfileComponent,
     ThumbnailAccommodationComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

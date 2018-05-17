@@ -9,3 +9,7 @@
     /* bug fix - no overlay */    
     display: none;    
 }
+
+[hidden] {
+    display: none;
+ }
