@@ -1,6 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,14 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  url: any;
+  url: any = 'https://en.opensuse.org/images/0/0b/Icon-user.png';
   title = 'app';
   modalRef: BsModalRef;
   context: CanvasRenderingContext2D;
+
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+
   constructor(private modalService: BsModalService) {}
 
   @ViewChild("imageCanvas") imageCanvas;
@@ -31,5 +36,28 @@ export class AppComponent {
   
   openModal(template: TemplateRef<any>) {
       this.modalRef = this.modalService.show(template);
+      this.initLogIn();
+      this.initRegister();
   }
+
+  initLogIn() {
+    this.loginForm = new FormGroup({
+      'username': new FormControl(null, [Validators.required]),
+      'password': new FormControl(null, [Validators.required]),
+    })
+  }
+
+  initRegister() {
+    this.registerForm = new FormGroup({
+      'username': new FormControl(null, [Validators.required]),
+      'password': new FormControl(null, [Validators.required]),
+      'email': new FormControl(null, [Validators.required]),
+      'fname': new FormControl(null, [Validators.required]),
+      'sname': new FormControl(null, [Validators.required]),
+      'city': new FormControl(null, [Validators.required]),
+      'phone': new FormControl(null, [Validators.required]),
+    })
+  }
+  
 }
+

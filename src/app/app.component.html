@@ -40,18 +40,19 @@
       </button>
   </div>
   <div class="modal-body">
-      <form #loginForm role="form">
+      <form [formGroup]="loginForm" role="form" >
           <div class="form-group">
-            <input type="text" #UserName name="UserName" class="form-control" placeholder="Username" required>
+            <input type="text" formControlName="username" class="form-control" placeholder="Username" >
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" required>
+              <input type="password" formControlName="password" class="form-control" placeholder="Password" >
+            </div>
+            <div class="modal-footer" role="group">
+              <button  (click)="logIn()" [disabled] = "!loginForm.valid"  class="btn btn-primary btn-block">Log In</button>
             </div>
         </form>
   </div>
-  <div class="modal-footer">
-      <button [disabled]="!loginForm.valid" class="btn btn-primary btn-block">Log In</button>
-    </div>
+  
 </ng-template>
 
 
@@ -63,37 +64,41 @@
       </button>
   </div>
   <div class="modal-body">
-      <form #registerForm role="form">
+      <form [formGroup]="registerForm" role="form">
           <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username" required>
+              <input type="text" formControlName="username" class="form-control" placeholder="Username" >
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" required>
+              <input type="password" formControlName="password" class="form-control" placeholder="Password" >
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="E-Mail" required>
+              <input type="email" formControlName="email" class="form-control" placeholder="E-Mail" >
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="First name"required>
+              <input type="text" formControlName="fname" class="form-control" placeholder="First name">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Second name" required>
+              <input type="text" formControlName="sname" class="form-control" placeholder="Second name" >
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="City" required>
+              <input type="text" formControlName="city" class="form-control" placeholder="City" >
             </div>
             <div class="form-group">
-              <input  type="text" class="form-control" placeholder="Phone number"required>
+              <input  type="text" formControlName="phone" class="form-control" placeholder="Phone number">
+            </div>
+            <div>
+              <img width="80" height="80" [src]="url">
+              <br><br><br>
             </div>
             <div class="form-group">
-                <img width="80" height="80" [src]="url">
               <input  type="file" class="form-control" (change)="preview($event)" accept="image/*">
+            </div>
+            <div class="modal-footer">
+              <button [disabled]="!registerForm.valid" class="btn btn-primary btn-block">Sign Up</button>
             </div>
           </form>
   </div>
-  <div class="modal-footer">
-      <button [disabled]="!registerForm.valid" class="btn btn-primary btn-block">Sign Up</button>
-    </div>
+  
 </ng-template>
 
 
