@@ -29,11 +29,9 @@ export class AccommodationProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(
       (data: Data) => {
-        this.accommodation = data.accommodationProfileResolver[0];
-
+        this.accommodation = data.accommodationProfileResolver;
         this.accommodationProfileService.getBusyTerminsFromAccommodationId(this.accommodation.id).subscribe(
           (response) => {
-            // console.log(response.json())
             this.busyDates = response.json();
             let disableDateRanges: IMyDateRange[] = [];
             for (let busyDate of this.busyDates) {
@@ -53,6 +51,10 @@ export class AccommodationProfileComponent implements OnInit {
         )
       }
     )
+  }
+
+  reserve() {
+
   }
 
 }

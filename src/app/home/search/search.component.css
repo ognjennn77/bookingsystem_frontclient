@@ -1,6 +1,6 @@
 .pickerStyle {
-    position: fixed;
-    z-index: 9999 !important;
+    /*position: absolute;*/
+    z-index: 100 !important;
 }
 
 

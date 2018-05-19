@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { DisplayService } from './display.service';
 import { HomeService } from '../home.service';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,9 @@ export class DisplayComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private displayService: DisplayService,
-    private route: ActivatedRoute, private homeService: HomeService) { }
+    private route: ActivatedRoute,
+    private homeService: HomeService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(
@@ -25,7 +27,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.accommodations = data.displayResolver.accommodations;
         this.totalNumber = data.displayResolver.totalNumber;
         this.homeService.setAccommodations(this.accommodations);
-        console.log(this.accommodations)
       }
     )
     this.subscription = this.homeService.accommodationSubject.subscribe(
@@ -39,18 +40,12 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  sort(sort: String) {
-    console.log(sort)
-    let currentPage = this.route.queryParams['page'];
-    let nextPage = +currentPage - 1;
-    if (isNaN(nextPage)) {
-      nextPage = 0;
-    }
+  sort(sort: string) {
     let formData: FormData = this.homeService.getFormData();
-    this.displayService.getSorted(sort, formData, nextPage, 8).subscribe(
-      (response) => {
-        console.log(response.json())
-      }
-    )
+    formData.has('sort') ? formData.set('sort', sort) : formData.append('sort', sort);
+
+    this.homeService.setFormData(formData);
+    this.homeService.setUrl(sort, undefined, '1');
   }
+
 }

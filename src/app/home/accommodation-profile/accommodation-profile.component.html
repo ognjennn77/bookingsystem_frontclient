@@ -63,12 +63,12 @@
             <p class="description">Available for: {{accommodation?.numberOfPeople}} person
             </p>
             <p class="category">
-              <strong>{{accommodation?.accommodationType}}</strong>
-              <strong>{{accommodation?.accommodationCategory}}</strong>
+              <strong>{{accommodation?.accommodationType?.name}}</strong>
+              <strong>{{accommodation?.accommodationCategory?.name}}</strong>
             </p>
             <!-- DODATNE USLUGE -->
             <h5 *ngIf="accommodation.additionalServices.length" class="colors">AdditionalServices:
-              <span ngFor="let service of accommodation.additionalServices">{{service}}</span>&nbsp;
+              <span ngFor="let service of accommodation.additionalServices">{{service}},</span>&nbsp;
             </h5>
 
             <div class="form-group">
@@ -79,7 +79,7 @@
           </div>
           <div class="panel-footer">
             <div class="action">
-              <button class="add-to-cart btn btn-default" type="button">Reserv
+              <button class="add-to-cart btn btn-default" (click)="reserve()" type="button">Reserve
                 <span class="fa fa-heart"></span>
               </button>
             </div>

@@ -22,7 +22,6 @@ export class AccommodationProfileResolver implements Resolve<Accommodation> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Accommodation | Observable<Accommodation> | Promise<Accommodation> {
 
         let id = route.params['id'];
-
         return this.accommodationProfileService.getAccommodation(id)
             .map((response: Response) => {
                 return response.json();

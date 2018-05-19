@@ -66,28 +66,29 @@ export class SearchComponent implements OnInit {
       formData.append('beginDate', date.beginDate),
         formData.append('endDate', date.endDate)
     }
+
     if (this.miniSearchForm.get('city').value)
       formData.append('city', this.miniSearchForm.get('city').value)
+
     if (this.miniSearchForm.get('numberOfPeople').value)
       formData.append('numberOfPeople', this.miniSearchForm.get('numberOfPeople').value)
 
     for (let service of this.checkedServices) {
       formData.append('additionalServices', service)
     }
+
     for (let category of this.checkedCategory) {
       formData.append('accommodationCategory', category)
     }
+
     for (let type of this.checkedType) {
       formData.append('accommodationType', type)
     }
 
-    this.homeSeervice.setFormData(formData);
+    formData.append('search', 'true');
 
-    this.searchService.getSearch(formData).subscribe(
-      (response) => {
-        this.homeSeervice.setAccommodations(response.json())
-      }
-    )
+    this.homeSeervice.setFormData(formData);
+    this.homeSeervice.setUrl(undefined, 'true', '1')
   }
 
   selectCategory(e, category: AccommodationCategory) {

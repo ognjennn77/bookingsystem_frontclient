@@ -23,12 +23,11 @@ export class DisplayResolver implements Resolve<returnValue> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): returnValue | Observable<returnValue> | Promise<returnValue> {
 
         let currentPage = route.queryParams['page'];
-        let nextPage = +currentPage - 1;
-        if (isNaN(nextPage)) {
-            nextPage = 0;
-        }
+        let nextPage = currentPage ? +currentPage : 1;
+        let sort = route.queryParams['sort'];
+        let search = route.queryParams['search'];
 
-        return this.displayService.getAccommodations(nextPage, 8)
+        return this.displayService.getAccommodations(nextPage, 8, sort, search)
             .map((response: Response) => {
                 const totalNumber = +response.headers.get("Total-Count");
 
