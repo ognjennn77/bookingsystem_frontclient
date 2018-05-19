@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
 import { AccommodationProfileService } from './accommodation-profile.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { IMyDrpOptions, IMyDateRange } from 'mydaterangepicker';
+import { IMyDrpOptions, IMyDateRange, IMyDateRangeModel, IMyDateSelected } from 'mydaterangepicker';
 import { Reservation } from '../../model/reservation.model';
 import { BusyDates } from '../../model/busyDates.model';
+import { DatePipe } from '@angular/common';
+import { format } from 'util';
 
 @Component({
   selector: 'app-accommodation-profile',
@@ -15,6 +17,11 @@ export class AccommodationProfileComponent implements OnInit {
 
   private accommodation: Accommodation;
   private busyDates: BusyDates[] = null;
+
+  private beginDate: string;
+  private endDate: string;
+
+  private temp: boolean = true;
 
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -53,8 +60,24 @@ export class AccommodationProfileComponent implements OnInit {
     )
   }
 
-  reserve() {
+  onDateRangeChanged(event: IMyDateRangeModel) {
 
+    this.beginDate = event.beginDate.year + '/' + event.beginDate.month + '/' + event.beginDate.day;
+    this.endDate = event.endDate.year + '/' + event.endDate.month + '/' + event.endDate.day;
+
+    this.temp = false;
+  }
+
+  reserve() {
+    this.accommodationProfileService.getPriceForTermine(this.accommodation.id, this.beginDate, this.endDate).subscribe(
+      (response) => {
+        console.log(response.json())
+
+
+
+        this.temp = true;
+      }
+    )
   }
 
 }

@@ -72,14 +72,15 @@
             </h5>
 
             <div class="form-group">
-              <my-date-range-picker style="position: fixed;" name="date" [options]="myDateRangePickerOptions" placeholder="Select your date for reservation"></my-date-range-picker>
+              <my-date-range-picker (dateRangeChanged)="onDateRangeChanged($event)" style="position: fixed;" name="date" [options]="myDateRangePickerOptions"
+                placeholder="Select your date for reservation"></my-date-range-picker>
             </div>
             <br>
             <br>
           </div>
           <div class="panel-footer">
             <div class="action">
-              <button class="add-to-cart btn btn-default" (click)="reserve()" type="button">Reserve
+              <button class="add-to-cart btn btn-default" [disabled]="temp" (click)="reserve()" type="button">Reserve
                 <span class="fa fa-heart"></span>
               </button>
             </div>

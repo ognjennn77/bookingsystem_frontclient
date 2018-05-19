@@ -12,11 +12,11 @@ export class AccommodationProfileService {
     }
 
     getBusyTerminsFromAccommodationId(id: number) {
-        console.log(id)
+        //   console.log(id)
         return this.http.get('http://localhost:8080/api/reservation/search?idAccommodation=' + id);
     }
 
-    getPriceForTermine(accommodationId: number, beginDate: Date, endDate: Date) {
-        //return this.http.get('http://localhost:8080/api/period/search?idAccommodation=' + accommodationId + '&beginDate=' + beginDate + '&endDate=' + endDate);
+    getPriceForTermine(accommodationId: number, beginDate: string, endDate: string) {
+        return this.http.get('http://localhost:8080/api/accommodation/' + accommodationId + '/searchDate?beginDate=' + beginDate + '&endDate=' + endDate);
     }
 }
