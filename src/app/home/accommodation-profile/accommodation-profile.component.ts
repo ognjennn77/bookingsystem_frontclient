@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import { format } from 'util';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
+declare var require: any;
+
 @Component({
   selector: 'app-accommodation-profile',
   templateUrl: './accommodation-profile.component.html',
@@ -22,6 +24,9 @@ export class AccommodationProfileComponent implements OnInit {
   private beginDate: string;
   private endDate: string;
 
+  private beginDate2: Date;
+  private endDate2: Date;
+
   private modalRef: BsModalRef;
 
   private disableReserve: boolean = true;
@@ -33,7 +38,11 @@ export class AccommodationProfileComponent implements OnInit {
     disableDateRanges: [],
     alignSelectorRight: true,
     sunHighlight: true,
-    markCurrentDay: true
+    markCurrentDay: true,
+    inline: false,
+    indicateInvalidDateRange: true,
+    editableDateRangeField: false,
+
   };
 
   constructor(private route: ActivatedRoute,
@@ -72,6 +81,8 @@ export class AccommodationProfileComponent implements OnInit {
     this.beginDate = event.beginDate.year + '/' + event.beginDate.month + '/' + event.beginDate.day;
     this.endDate = event.endDate.year + '/' + event.endDate.month + '/' + event.endDate.day;
 
+    this.beginDate2 = event.beginJsDate
+    this.endDate2 = event.endJsDate
     this.disableReserve = false;
   }
 
@@ -87,6 +98,22 @@ export class AccommodationProfileComponent implements OnInit {
   }
 
   makeReservation() {
+    let reservation = {}
+
+    reservation['beginDate'] = this.beginDate2.toISOString();
+    reservation['endDate'] = this.endDate2.toISOString();
+
+    reservation['accommodation'] = { id: this.accommodation.id };
+    //  reservation.user = 
+
+    var js2xmlparser = require("js2xmlparser");
+
+    let xmlFile = js2xmlparser.parse("reservation", reservation);
+
+    this.accommodationProfileService.newReservation(xmlFile).subscribe(
+      (response) => { console.log(response) }
+    )
+
     this.disableReserve = true;
     this.modalRef.hide();
   }

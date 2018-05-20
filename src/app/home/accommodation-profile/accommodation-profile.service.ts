@@ -1,5 +1,5 @@
 
-import { Http, Headers, Response } from "@angular/http";
+import { Http, Headers, Response, RequestOptions } from "@angular/http";
 import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 
@@ -17,5 +17,18 @@ export class AccommodationProfileService {
 
     getPriceForTermine(accommodationId: number, beginDate: string, endDate: string) {
         return this.http.get('http://localhost:8080/api/accommodation/' + accommodationId + '/searchDate?beginDate=' + beginDate + '&endDate=' + endDate);
+    }
+
+    newReservation(xmlFile: any) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'text/xml');
+        headers.append('Accept', 'text/xml');
+        let options = new RequestOptions({ headers: headers });
+        // let body = '<request>'
+        // '<username>Username</username>'
+        // '<password>Password</password>'
+        // '</request>';
+        console.log(xmlFile)
+        return this.http.post('http://localhost:8080/api/reservation/new', xmlFile, options);
     }
 }
