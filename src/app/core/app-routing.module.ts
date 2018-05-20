@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { DisplayResolver } from './home/display/display-resolver.service';
-import { DisplayComponent } from './home/display/display.component';
-import { AccommodationProfileComponent } from './home/accommodation-profile/accommodation-profile.component';
-import { AccommodationProfileResolver } from './home/accommodation-profile/accommodation-profile-resolver.service';
+import { HomeComponent } from '.././home/home.component';
+import { DisplayResolver } from '.././home/display/display-resolver.service';
+import { DisplayComponent } from '.././home/display/display.component';
+import { AccommodationProfileComponent } from '.././home/accommodation-profile/accommodation-profile.component';
+import { AccommodationProfileResolver } from '.././home/accommodation-profile/accommodation-profile-resolver.service';
 
 
 const appRoutes: Routes = [

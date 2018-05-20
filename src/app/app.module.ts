@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './core/app-routing.module';
 import { SearchComponent } from './home/search/search.component';
 import { DisplayComponent } from './home/display/display.component';
 import { ThumbnailAccommodationComponent } from './home/display/thumbnail-accommodation/thumbnail-accommodation.component';
@@ -23,6 +23,12 @@ import { AccommodationProfileResolver } from './home/accommodation-profile/accom
 import { MyDatePickerModule } from 'mydatepicker';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { HomeService } from './home/home.service';
+import {UserService} from "./app.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthService} from "./core/auth.service";
+import {Interceptor} from "./core/inteceptor";
+import {TokenStorage} from "./core/token.storage";
+import {ErrorDialogComponent} from './core/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { HomeService } from './home/home.service';
     AccommodationProfileComponent,
     ThumbnailAccommodationComponent,
     PaginationComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +56,16 @@ import { HomeService } from './home/home.service';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     MyDatePickerModule,
+    HttpClientModule,
     MyDateRangePickerModule
   ],
-  providers: [DisplayResolver, DisplayService, SearchService,
+  entryComponents: [ErrorDialogComponent],
+  providers: [ErrorDialogComponent,DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver,
-    HomeService],
+    HomeService,TokenStorage,AuthService,{provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi : true}
+    ],
   bootstrap: [AppComponent]
 })
 

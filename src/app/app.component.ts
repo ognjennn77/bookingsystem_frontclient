@@ -2,6 +2,11 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {AuthService} from './core/auth.service';
+import {TokenStorage} from './core/token.storage';
+import {Router} from '@angular/router';
+
+import { Login} from './model/login.model'
 
 @Component({
   selector: 'app-root',
@@ -17,9 +22,35 @@ export class AppComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  constructor(private modalService: BsModalService) {}
+  
+
+  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService) {}
 
   @ViewChild("imageCanvas") imageCanvas;
+
+  username: string;
+  password: string;
+
+  login(): void {
+    
+    this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
+      data => console.log(data),
+      data => localStorage.setItem("loggedUser", JSON.stringify(data)),
+      
+      () => {
+        this.callEmitter();
+      }
+    );
+  }
+
+  callEmitter()
+  {
+    console.log(this.username);
+    console.log(this.password);
+    this.authService.emitRole(this.username);
+  }
+
+  
 
   preview(event: any): void{
     if (event.target.files && event.target.files[0]) {
