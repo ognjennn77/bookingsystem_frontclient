@@ -29,8 +29,13 @@ export class SearchComponent implements OnInit {
 
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
+    disableDateRanges: [],
+    alignSelectorRight: true,
     sunHighlight: true,
     markCurrentDay: true,
+    inline: false,
+    indicateInvalidDateRange: true,
+    editableDateRangeField: false,
     openSelectorOnInputClick: true
   };
 

@@ -23,7 +23,6 @@ import { AccommodationProfileResolver } from './home/accommodation-profile/accom
 import { MyDatePickerModule } from 'mydatepicker';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { HomeService } from './home/home.service';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     MyDatePickerModule,
-    MyDateRangePickerModule,
-    NgbModule.forRoot()
+    MyDateRangePickerModule
   ],
   providers: [DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver,
