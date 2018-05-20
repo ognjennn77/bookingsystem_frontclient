@@ -1,6 +1,5 @@
 <div class="container">
   <div class="card">
-    <!-- <div class="container-fliud"> -->
     <div class="wrapper row">
       <div class="preview col-md-6">
 
@@ -80,21 +79,21 @@
           </div>
           <div class="panel-footer">
             <div class="action">
-              <button class="add-to-cart btn btn-default" [disabled]="temp" (click)="reserve()" type="button">Reserve
-                <span class="fa fa-heart"></span>
+              <button class="add-to-cart btn btn-default" [disabled]="disableReserve" (click)="reserve(confirmDialog)" type="button ">Reserve
+                <span class="fa fa-heart "></span>
               </button>
             </div>
           </div>
         </div>
-        <!-- <div class="rating">
-          <div class="stars">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+        <!-- <div class="rating ">
+          <div class="stars ">
+            <span class="fa fa-star checked "></span>
+            <span class="fa fa-star checked "></span>
+            <span class="fa fa-star checked "></span>
+            <span class="fa fa-star "></span>
+            <span class="fa fa-star "></span>
           </div>
-          <span class="review-no">41 reviews</span>
+          <span class="review-no ">41 reviews</span>
         </div> -->
 
 
@@ -102,6 +101,23 @@
 
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </div>
+
+
+<ng-template #confirmDialog>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>The price of your reservation is
+      <strong>{{totalPrice}}</strong>. To continue with reservation click YES!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" type="button" (click)="makeReservation()">Yes</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">No</button>
+  </div>
+</ng-template>

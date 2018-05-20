@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
 import { AccommodationProfileService } from './accommodation-profile.service';
 import { ActivatedRoute, Data } from '@angular/router';
@@ -7,6 +7,7 @@ import { Reservation } from '../../model/reservation.model';
 import { BusyDates } from '../../model/busyDates.model';
 import { DatePipe } from '@angular/common';
 import { format } from 'util';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-accommodation-profile',
@@ -21,7 +22,11 @@ export class AccommodationProfileComponent implements OnInit {
   private beginDate: string;
   private endDate: string;
 
-  private temp: boolean = true;
+  private modalRef: BsModalRef;
+
+  private disableReserve: boolean = true;
+
+  private totalPrice: string = "";
 
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -31,7 +36,9 @@ export class AccommodationProfileComponent implements OnInit {
     markCurrentDay: true
   };
 
-  constructor(private route: ActivatedRoute, private accommodationProfileService: AccommodationProfileService) { }
+  constructor(private route: ActivatedRoute,
+    private accommodationProfileService: AccommodationProfileService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
     this.route.data.subscribe(
@@ -65,19 +72,27 @@ export class AccommodationProfileComponent implements OnInit {
     this.beginDate = event.beginDate.year + '/' + event.beginDate.month + '/' + event.beginDate.day;
     this.endDate = event.endDate.year + '/' + event.endDate.month + '/' + event.endDate.day;
 
-    this.temp = false;
+    this.disableReserve = false;
   }
 
-  reserve() {
+  reserve(template: TemplateRef<any>) {
     this.accommodationProfileService.getPriceForTermine(this.accommodation.id, this.beginDate, this.endDate).subscribe(
       (response) => {
-        console.log(response.json())
+        this.totalPrice = response.json();
 
 
-
-        this.temp = true;
+        this.modalRef = this.modalService.show(template);
       }
     )
+  }
+
+  makeReservation() {
+    this.disableReserve = true;
+    this.modalRef.hide();
+  }
+
+  cancel(template: TemplateRef<any>) {
+    this.modalRef.hide();
   }
 
 }
