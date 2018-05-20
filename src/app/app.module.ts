@@ -29,6 +29,7 @@ import {AuthService} from "./core/auth.service";
 import {Interceptor} from "./core/inteceptor";
 import {TokenStorage} from "./core/token.storage";
 import {ErrorDialogComponent} from './core/error-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {ErrorDialogComponent} from './core/error-dialog.component';
     AccommodationProfileComponent,
     ThumbnailAccommodationComponent,
     PaginationComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

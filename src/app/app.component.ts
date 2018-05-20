@@ -28,25 +28,47 @@ export class AppComponent {
 
   @ViewChild("imageCanvas") imageCanvas;
 
-  username: string;
-  password: string;
+  username: string = "";
+  password: string = "";
+  sin : boolean = false;
+  sup : boolean = false;
+  lout : boolean = true;
+  prof : boolean = true;
+
 
   login(): void {
     
     this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
-      data => console.log(data),
       data => localStorage.setItem("loggedUser", JSON.stringify(data)),
-      
+      error => this.badInput(),
       () => {
         this.callEmitter();
       }
     );
   }
 
+  logout(): void{
+    this.sin = false;
+    this.sup = false;
+    this.lout = true;
+    this.prof  = true;
+    this.router.navigate(['/home'])
+    localStorage.clear();
+  }
+
+  badInput()
+  {
+    document.getElementById("login").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>";
+  }
+
   callEmitter()
   {
-    console.log(this.username);
-    console.log(this.password);
+    this.modalRef.hide()
+    this.sin = true;
+    this.sup = true;
+    this.lout = false;
+    this.prof = false;
+    this.router.navigate(['/profile'])
     this.authService.emitRole(this.username);
   }
 
@@ -66,6 +88,8 @@ export class AppComponent {
   }
   
   openModal(template: TemplateRef<any>) {
+      this.username = "";
+      this.password =  "";
       this.modalRef = this.modalService.show(template);
       this.initLogIn();
       this.initRegister();
