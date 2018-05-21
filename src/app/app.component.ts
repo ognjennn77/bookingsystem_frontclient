@@ -5,8 +5,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {AuthService} from './core/auth.service';
 import {TokenStorage} from './core/token.storage';
 import {Router} from '@angular/router';
+import { UploadFileService } from './upload-file.service';
+import {UserRegistrationService} from './user-registration.service'
+
 
 import { Login} from './model/login.model'
+
+declare var require: any;
 
 @Component({
   selector: 'app-root',
@@ -24,16 +29,30 @@ export class AppComponent {
 
   
 
-  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService) {}
+  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService, private fileUploadService: UploadFileService, private registrationService :UserRegistrationService) {}
 
   @ViewChild("imageCanvas") imageCanvas;
 
   username: string = "";
   password: string = "";
+  usernameR: string = "";
+  passwordR: string = "";
+  emailR: string = "";
+  firstnameR: string = "";
+  secondameR: string = "";
+  cityR: string = "";
+  phoneR: string = "";
   sin : boolean = false;
   sup : boolean = false;
   lout : boolean = true;
   prof : boolean = true;
+  fileToUpload: File = null;
+  files: FileList;
+  imgId : number = -1;
+
+  
+
+  
 
 
   login(): void {
@@ -58,7 +77,7 @@ export class AppComponent {
 
   badInput()
   {
-    document.getElementById("login").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>";
+    document.getElementById("login").innerHTML = "<div align=\"center\" class=\"alert alert-danger \"> Wrong email/password! </div>";
   }
 
   callEmitter()
@@ -71,7 +90,34 @@ export class AppComponent {
     this.router.navigate(['/profile'])
     this.authService.emitRole(this.username);
   }
+  
 
+  register(): void{
+    
+    console.log(this.imgId.toString());
+    let userR ={};
+    userR['username'] = this.usernameR;
+    userR['password'] = this.passwordR;
+    userR['email'] = this.emailR;
+    userR['firstname'] = this.firstnameR;
+    userR['lastname'] = this.secondameR;
+    userR['city'] = this.cityR;
+    userR['phonenumber'] = this.phoneR;
+    userR['role'] = "USER";
+    
+    var js2xmlparser = require("js2xmlparser");
+    let xmlFile = js2xmlparser.parse("abstractuser", userR);
+    if(this.fileToUpload != null)
+      this.uploadFileToActivity(xmlFile);
+    else
+    this.registrationService.newUser(xmlFile, Number(1).toString()).subscribe(
+      (response) => {   },
+      error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> User whit that username/email already exists! </div>";}
+    
+    )
+
+    
+  }
   
 
   preview(event: any): void{
@@ -83,8 +129,24 @@ export class AppComponent {
       }
   
       reader.readAsDataURL(event.target.files[0]);
-    
+       this.files = event.target.files;
+      this.fileToUpload = this.files.item(0);
+      
     }
+  }
+
+  uploadFileToActivity(xmlFile: any) {
+    this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
+      this.imgId = data;
+      this.registrationService.newUser(xmlFile, this.imgId.toString()).subscribe(
+       (response) => {   },
+       error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>";}
+       
+     )
+      
+      }, error => {
+        console.log(error);
+      });
   }
   
   openModal(template: TemplateRef<any>) {

@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUser().subscribe(
       (data ) => {
         this.user = <User> data;
-        console.log(this.user);
+        //console.log(this.user);
       }
     );
     

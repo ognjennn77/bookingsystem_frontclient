@@ -30,6 +30,8 @@ import { AuthService } from "./core/auth.service";
 import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { ErrorDialogComponent } from './core/error-dialog.component';
+import { UploadFileService } from './upload-file.service';
+import {UserRegistrationService} from './user-registration.service'
 
 @NgModule({
   declarations: [
@@ -63,8 +65,8 @@ import { ErrorDialogComponent } from './core/error-dialog.component';
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, DisplayResolver, DisplayService, SearchService,
-    AccommodationProfileService, AccommodationProfileResolver,
-    HomeService, TokenStorage, AuthService, {
+    AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
+    UserRegistrationService, HomeService, TokenStorage, AuthService, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
