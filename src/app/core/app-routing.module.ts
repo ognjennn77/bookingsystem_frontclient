@@ -5,6 +5,7 @@ import { DisplayResolver } from '.././home/display/display-resolver.service';
 import { DisplayComponent } from '.././home/display/display.component';
 import { AccommodationProfileComponent } from '.././home/accommodation-profile/accommodation-profile.component';
 import { AccommodationProfileResolver } from '.././home/accommodation-profile/accommodation-profile-resolver.service';
+import {ProfileComponent } from '../profile/profile.component'
 
 
 const appRoutes: Routes = [
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
       { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver } },
     ]
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({
