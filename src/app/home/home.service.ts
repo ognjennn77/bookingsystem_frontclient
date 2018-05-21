@@ -34,20 +34,19 @@ export class HomeService {
         return this.formData;
     }
 
-    setUrl(sort?: string, search?: string, page?: string) {
+    setUrlSearch(search?: any, page?: string) {
 
-        let currentPage = this.route.queryParams['page'];
-        let searchQuery = search ? search : this.route.queryParams['search'];
-        let sortQuery = sort ? sort : this.route.queryParams['sort'];
-        let nextPage = page ? page : (currentPage ? +currentPage - 1 : 0);
+        search['page'] = page;
+        this.router.navigate(['/home'], { queryParams: search });
+    }
+
+    setUrlSort(sort?: string, page?: string) {
 
         let queryParamsTemp = {}
+        queryParamsTemp['sort'] = sort;
+        queryParamsTemp['page'] = page;
 
-        queryParamsTemp['search'] = searchQuery;
-        queryParamsTemp['sort'] = sortQuery;
-        queryParamsTemp['page'] = nextPage;
-
-        this.router.navigate(['/home'], { queryParams: queryParamsTemp });
+        this.router.navigate(['/home'], { queryParams: queryParamsTemp, queryParamsHandling: 'merge' });
     }
 
 }

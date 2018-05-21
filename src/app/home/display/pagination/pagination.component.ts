@@ -1,4 +1,4 @@
-import { OnInit, Component, Input } from "@angular/core";
+import { OnInit, Component, Input, OnChanges } from "@angular/core";
 import { PaginationService } from "./pagination.service";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
@@ -10,7 +10,7 @@ import { Params } from "@angular/router/src/shared";
   styleUrls: ['./pagination.component.css'],
   providers: [PaginationService]
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
 
   @Input() totalNumber: number;
   pager: any = {};
@@ -20,6 +20,19 @@ export class PaginationComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(
+      (queryParams: Params) => {
+        let page = queryParams['page'];
+        if (!(page == undefined)) {
+          this.setPage(+page);
+        } else {
+          this.setPage(1);
+        }
+      }
+    );
+  }
+
+  ngOnChanges() {
     this.route.queryParams.subscribe(
       (queryParams: Params) => {
         let page = queryParams['page'];

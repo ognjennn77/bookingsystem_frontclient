@@ -24,7 +24,6 @@ export class AccommodationProfileResolver implements Resolve<Accommodation> {
         let id = route.params['id'];
         return this.accommodationProfileService.getAccommodation(id)
             .map((response: Response) => {
-                //  console.log(response.json())
                 return response.json();
             });
     }

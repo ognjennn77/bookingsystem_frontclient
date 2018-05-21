@@ -63,37 +63,59 @@ export class SearchComponent implements OnInit {
   }
 
   searchData() {
+
     let formData: FormData = new FormData();
+
+    let queryParamsSearch = {}
 
     let date = this.miniSearchForm.get('date').value;
 
     if (date) {
-      formData.append('beginDate', date.beginDate),
-        formData.append('endDate', date.endDate)
+      formData.append('beginDate', date.beginJsDate.toISOString()),
+        formData.append('endDate', date.endJsDate.toISOString());
+      queryParamsSearch['beginDate'] = date.beginJsDate.toISOString();
+      queryParamsSearch['endDate'] = date.endJsDate.toISOString();
+
     }
 
-    if (this.miniSearchForm.get('city').value)
+    if (this.miniSearchForm.get('city').value) {
       formData.append('city', this.miniSearchForm.get('city').value)
-
-    if (this.miniSearchForm.get('numberOfPeople').value)
-      formData.append('numberOfPeople', this.miniSearchForm.get('numberOfPeople').value)
-
-    for (let service of this.checkedServices) {
-      formData.append('additionalServices', service)
+      queryParamsSearch['city'] = this.miniSearchForm.get('city').value;
     }
 
+    if (this.miniSearchForm.get('numberOfPeople').value) {
+      formData.append('numberOfPeople', this.miniSearchForm.get('numberOfPeople').value);
+      queryParamsSearch['numberOfPeople'] = this.miniSearchForm.get('numberOfPeople').value;
+    }
+
+    let services = null;
+    for (let service of this.checkedServices) {
+      formData.append('additionalServices', service);
+      services += service += ","
+    }
+    if (services)
+      queryParamsSearch['additionalServices'] = services;
+
+    let categorys = null;
     for (let category of this.checkedCategory) {
       formData.append('accommodationCategory', category)
+      categorys += category += ","
     }
+    if (categorys)
+      queryParamsSearch['accommodationCategory'] = categorys;
 
+    let types = null;
     for (let type of this.checkedType) {
       formData.append('accommodationType', type)
+      types += type += ","
     }
+    if (types)
+      queryParamsSearch['accommodationType'] = types;
 
     formData.append('search', 'true');
 
     this.homeSeervice.setFormData(formData);
-    this.homeSeervice.setUrl(undefined, 'true', '1')
+    this.homeSeervice.setUrlSearch(queryParamsSearch, '1')
   }
 
   selectCategory(e, category: AccommodationCategory) {

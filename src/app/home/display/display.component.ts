@@ -45,7 +45,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     formData.has('sort') ? formData.set('sort', sort) : formData.append('sort', sort);
 
     this.homeService.setFormData(formData);
-    this.homeService.setUrl(sort, undefined, '1');
+    this.homeService.setUrlSort(sort, '1');
   }
 
 }
