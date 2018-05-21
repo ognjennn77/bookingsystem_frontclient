@@ -23,22 +23,13 @@ import { AccommodationProfileResolver } from './home/accommodation-profile/accom
 import { MyDatePickerModule } from 'mydatepicker';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { HomeService } from './home/home.service';
-<<<<<<< HEAD
-import {UserService} from "./app.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthService} from "./core/auth.service";
-import {Interceptor} from "./core/inteceptor";
-import {TokenStorage} from "./core/token.storage";
-import {ErrorDialogComponent} from './core/error-dialog.component';
 import { ProfileComponent } from './profile/profile.component';
-=======
 import { UserService } from "./app.service";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthService } from "./core/auth.service";
 import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { ErrorDialogComponent } from './core/error-dialog.component';
->>>>>>> d595c3c2946b6209c590ff25a597f120b6d894d4
 
 @NgModule({
   declarations: [
