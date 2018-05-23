@@ -11,17 +11,20 @@
        <div class="col-md-7 ">
 
 <div class="panel panel-default">
-  <div class="panel-heading">  <h4 >User Profile</h4></div>
+  <div class="panel-heading">  <h4 >User Profile 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    <button (click)="edit()" [hidden]="editE"><img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/edit-24.png"/></button>
+    <button (click)="save()" [hidden]="saveE"><img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/floppy-24.png"/></button></h4> </div>
    <div class="panel-body">
        
     <div class="box box-info">
         
             <div class="box-body">
                      <div class="col-sm-6">
-                     <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                     <div  align="center"> <img alt="User Pic" src="data:image/JPEG;base64,{{image}}"  id="profile-image1" class="img-circle img-responsive"> 
                 
-                <input id="profile-image-upload" class="hidden" type="file">
-<div style="color:#999;" >click here to change profile image</div>
+                <input id="profile-image-upload"  class="hidden" type="file">
+<div [hidden]="changeE" style="color:#999;" >click here to change profile image</div>
                 <!--Upload Image Js And Css-->
            
               
@@ -43,33 +46,33 @@
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
     
-<div class="col-sm-5 col-xs-6 tital " >Username:</div><div class="col-sm-7 col-xs-6 ">{{user.username}}</div>
+<div class="col-sm-5 col-xs-6 tital " >Username:</div><div [attr.contenteditable]="usernameE" class="col-sm-7 col-xs-6 ">{{user.username}}</div>
       <div class="clearfix"></div>
 <div class="bot-border"></div>              
-<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
+<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div [attr.contenteditable]="firstnameE" class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 
-<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7"> {{user.lastName}}</div>
+<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div [attr.contenteditable]="lastnameE" class="col-sm-7"> {{user.lastName}}</div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 
 
-<div class="col-sm-5 col-xs-6 tital " >Email adress:</div><div class="col-sm-7">{{user.email}}</div>
+<div class="col-sm-5 col-xs-6 tital " >Email adress:</div><div [attr.contenteditable]="emailE" class="col-sm-7">{{user.email}}</div>
 <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 
 
-<div class="col-sm-5 col-xs-6 tital " >Phone number:</div><div class="col-sm-7">{{user.phoneNumber}}</div>
+<div class="col-sm-5 col-xs-6 tital " >Phone number:</div><div [attr.contenteditable]="phoneE" class="col-sm-7">{{user.phoneNumber}}</div>
 <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 
 
-<div class="col-sm-5 col-xs-6 tital " >City:</div><div class="col-sm-7">{{user.city}}</div>
+<div class="col-sm-5 col-xs-6 tital " >City:</div><div [attr.contenteditable]="cityE" class="col-sm-7">{{user.city}}</div>
 
 
 

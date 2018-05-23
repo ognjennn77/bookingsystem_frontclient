@@ -71,7 +71,7 @@ export class AppComponent {
     this.sup = false;
     this.lout = true;
     this.prof  = true;
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
     localStorage.clear();
   }
 
