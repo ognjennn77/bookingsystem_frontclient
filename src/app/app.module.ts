@@ -32,6 +32,8 @@ import { TokenStorage } from "./core/token.storage";
 import { ErrorDialogComponent } from './core/error-dialog.component';
 import { UploadFileService } from './upload-file.service';
 import {UserRegistrationService} from './user-registration.service'
+import { ProfileResolver } from './profile/profile-resolver.service';
+import { ProfileService } from './profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -64,9 +66,9 @@ import {UserRegistrationService} from './user-registration.service'
     MyDateRangePickerModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, DisplayResolver, DisplayService, SearchService,
+  providers: [ProfileResolver, DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
-    UserRegistrationService, HomeService, TokenStorage, AuthService, {
+    UserRegistrationService, HomeService, ProfileService, TokenStorage, AuthService, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

@@ -17,7 +17,10 @@ export class UserRegistrationService {
         // '<password>Password</password>'
         // '</request>';
         console.log(xmlFile)
-        return this.http.post('http://localhost:8080/api/abstractUser/new/'+id, xmlFile, options);
+        if(id != '-1')
+            return this.http.post('http://localhost:8080/api/abstractUser/new/'+id, xmlFile, options);
+        else 
+            return this.http.post('http://localhost:8080/api/abstractUser/new', xmlFile, options);
     }
 
 }

@@ -6,6 +6,7 @@ import { DisplayComponent } from '.././home/display/display.component';
 import { AccommodationProfileComponent } from '.././home/accommodation-profile/accommodation-profile.component';
 import { AccommodationProfileResolver } from '.././home/accommodation-profile/accommodation-profile-resolver.service';
 import {ProfileComponent } from '../profile/profile.component'
+import { ProfileResolver } from '../profile/profile-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -17,7 +18,7 @@ const appRoutes: Routes = [
     ]
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent, resolve: {profileResolver: ProfileResolver}}
 ];
 
 @NgModule({

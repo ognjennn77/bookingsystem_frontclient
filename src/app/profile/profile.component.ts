@@ -3,6 +3,8 @@ import {LoggedUtils} from "../../utils/logged.utils"
 import {Http, Headers} from '@angular/http';
 import {ProfileService} from './profile.service'
 import {User} from '../model/user.model'
+import { ActivatedRoute } from '@angular/router';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,22 +17,18 @@ export class ProfileComponent implements OnInit {
   user : User ;
    
 
-  constructor(private profileService:ProfileService) { 
-    this.profileService.getUser().subscribe(
-      (data ) => {
-        this.user = <User> data;
-        //console.log(this.user);
-      }
-    );
-    
-    
-    
+  constructor(private profileService:ProfileService, private route: ActivatedRoute) {     
   }
 
  
 
   ngOnInit() {
-    
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.user = data.profileResolver;
+        console.log(this.user);
+      }
+    )
   }
 
 
