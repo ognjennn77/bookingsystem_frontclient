@@ -5,45 +5,46 @@
 
         <div class="preview-pic tab-content">
           <div class="tab-pane active" id="pic-1">
-            <img src="http://placekitten.com/400/252" />
+            <img *ngIf="previewImages[0]" class="img-responsive" [src]="previewImages[0]" />
+            <img *ngIf="!previewImages[0]" src="assets/img/empty-profile.png" />
           </div>
-          <div class="tab-pane" id="pic-2">
-            <img src="http://placekitten.com/400/252" />
+          <div *ngIf="previewImages[1]" class="tab-pane" id="pic-2">
+            <img [src]="previewImages[1]" />
           </div>
-          <div class="tab-pane" id="pic-3">
-            <img src="http://placekitten.com/400/252" />
+          <div *ngIf="previewImages[2]" class="tab-pane" id="pic-3">
+            <img [src]="previewImages[2]" />
           </div>
-          <div class="tab-pane" id="pic-4">
-            <img src="http://placekitten.com/400/252" />
+          <div *ngIf="previewImages[3]" class="tab-pane" id="pic-4">
+            <img [src]="previewImages[3]" />
           </div>
-          <div class="tab-pane" id="pic-5">
-            <img src="http://placekitten.com/400/252" />
+          <div *ngIf="previewImages[4]" class="tab-pane" id="pic-5">
+            <img [src]="previewImages[4]" />
           </div>
         </div>
         <ul class="preview-thumbnail nav nav-tabs">
-          <li class="active">
+          <li *ngIf="previewImages[0]" class="active">
             <a data-target="#pic-1" data-toggle="tab">
-              <img src="http://placekitten.com/200/126" />
+              <img class="img-responsive" [src]="previewImages[0]" />
             </a>
           </li>
-          <li>
+          <li *ngIf="previewImages[1]">
             <a data-target="#pic-2" data-toggle="tab">
-              <img src="http://placekitten.com/200/126" />
+              <img [src]="previewImages[1]" />
             </a>
           </li>
-          <li>
+          <li *ngIf="previewImages[2]">
             <a data-target="#pic-3" data-toggle="tab">
-              <img src="http://placekitten.com/200/126" />
+              <img [src]="previewImages[2]" />
             </a>
           </li>
-          <li>
+          <li *ngIf="previewImages[3]">
             <a data-target="#pic-4" data-toggle="tab">
-              <img src="http://placekitten.com/200/126" />
+              <img [src]="previewImages[3]" />
             </a>
           </li>
-          <li>
+          <li *ngIf="previewImages[4]">
             <a data-target="#pic-5" data-toggle="tab">
-              <img src="http://placekitten.com/200/126" />
+              <img [src]="previewImages[4]" />
             </a>
           </li>
         </ul>

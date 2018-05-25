@@ -31,7 +31,9 @@ import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { ErrorDialogComponent } from './core/error-dialog.component';
 import { UploadFileService } from './upload-file.service';
-import {UserRegistrationService} from './user-registration.service'
+import { UserRegistrationService } from './user-registration.service'
+import { ThumbnailAccommodationService } from './home/display/thumbnail-accommodation/thumbnail-accommodation.service';
+import { ImagesResolver } from './home/accommodation-profile/images-resolver.services';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import {UserRegistrationService} from './user-registration.service'
   entryComponents: [ErrorDialogComponent],
   providers: [ErrorDialogComponent, DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
-    UserRegistrationService, HomeService, TokenStorage, AuthService, {
+    UserRegistrationService, HomeService, TokenStorage, AuthService, ThumbnailAccommodationService, ImagesResolver, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

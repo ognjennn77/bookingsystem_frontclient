@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Accommodation } from '../../../model/accommodation.model';
+import { ThumbnailAccommodationService } from './thumbnail-accommodation.service';
+import { Image } from '../../../model/image.model';
 
 @Component({
   selector: 'app-thumbnail-accommodation',
@@ -12,18 +14,20 @@ export class ThumbnailAccommodationComponent implements OnInit {
 
   previewImage: string;
 
-  constructor() { }
+  constructor(private thuAccommodation: ThumbnailAccommodationService) { }
 
   ngOnInit() {
     this.showPic();
   }
 
   private showPic(): void {
-
-    if (this.accommodation.images && this.accommodation.images[0] && this.accommodation.images[0].image) {
-      this.previewImage = `data:image/jpeg;base64,${this.accommodation.images[0].image}`
-      return
-    }
+    this.thuAccommodation.getImage(this.accommodation.id).subscribe(
+      (response) => {
+        let i: Image[] = response.json()
+        this.previewImage = `data:image/jpeg;base64,${i[0].image}`;
+        return;
+      }
+    )
 
     this.previewImage = 'assets/img/empty-profile.png'
   }

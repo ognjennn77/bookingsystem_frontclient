@@ -18,4 +18,8 @@ export class DisplayService {
 
         return this.http.post('http://localhost:8080/api/accommodation', formData)
     }
+
+    // getImage(idAccommodation: number) {
+    //     return this.http.get('http://localhost:8080/api/accommodation')
+    // }
 }

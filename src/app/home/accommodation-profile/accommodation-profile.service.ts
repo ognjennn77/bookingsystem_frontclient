@@ -24,11 +24,10 @@ export class AccommodationProfileService {
         headers.append('Content-Type', 'text/xml');
         headers.append('Accept', 'text/xml');
         let options = new RequestOptions({ headers: headers });
-        // let body = '<request>'
-        // '<username>Username</username>'
-        // '<password>Password</password>'
-        // '</request>';
-        console.log(xmlFile)
         return this.http.post('http://localhost:8080/api/reservation/new', xmlFile, options);
+    }
+
+    getImage(idAccommodation: number) {
+        return this.http.get('http://localhost:8080/api/image/search/' + idAccommodation)
     }
 }

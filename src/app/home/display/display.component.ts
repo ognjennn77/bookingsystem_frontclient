@@ -27,6 +27,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.accommodations = data.displayResolver.accommodations;
         this.totalNumber = data.displayResolver.totalNumber;
         this.homeService.setAccommodations(this.accommodations);
+        
       }
     )
     this.subscription = this.homeService.accommodationSubject.subscribe(

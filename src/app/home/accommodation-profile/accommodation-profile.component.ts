@@ -8,6 +8,7 @@ import { BusyDates } from '../../model/busyDates.model';
 import { DatePipe } from '@angular/common';
 import { format } from 'util';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Image } from '../../model/image.model';
 
 declare var require: any;
 
@@ -32,6 +33,8 @@ export class AccommodationProfileComponent implements OnInit {
   private disableReserve: boolean = true;
 
   private totalPrice: string = "";
+
+  private previewImages: string[];
 
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -74,6 +77,11 @@ export class AccommodationProfileComponent implements OnInit {
         )
       }
     )
+
+    this.route.data.subscribe(
+      (data: Data) => {
+        this.previewImages = data.imageResolver
+      })
   }
 
   onDateRangeChanged(event: IMyDateRangeModel) {

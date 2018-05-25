@@ -5,7 +5,8 @@ import { DisplayResolver } from '.././home/display/display-resolver.service';
 import { DisplayComponent } from '.././home/display/display.component';
 import { AccommodationProfileComponent } from '.././home/accommodation-profile/accommodation-profile.component';
 import { AccommodationProfileResolver } from '.././home/accommodation-profile/accommodation-profile-resolver.service';
-import {ProfileComponent } from '../profile/profile.component'
+import { ProfileComponent } from '../profile/profile.component'
+import { ImagesResolver } from '../home/accommodation-profile/images-resolver.services';
 
 
 const appRoutes: Routes = [
@@ -13,7 +14,7 @@ const appRoutes: Routes = [
     path: 'home', component: HomeComponent,
     children: [
       { path: '', component: DisplayComponent, runGuardsAndResolvers: 'paramsOrQueryParamsChange', resolve: { displayResolver: DisplayResolver } },
-      { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver } },
+      { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver, imageResolver: ImagesResolver } },
     ]
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
