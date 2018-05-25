@@ -39,7 +39,7 @@ export class AppComponent {
   passwordR: string = "";
   emailR: string = "";
   firstnameR: string = "";
-  secondameR: string = "";
+  secondnameR: string = "";
   cityR: string = "";
   phoneR: string = "";
   sin : boolean = false;
@@ -71,7 +71,7 @@ export class AppComponent {
     this.sup = false;
     this.lout = true;
     this.prof  = true;
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
     localStorage.clear();
   }
 
@@ -94,15 +94,15 @@ export class AppComponent {
 
   register(): void{
     
-    console.log(this.imgId.toString());
+    //console.log(this.imgId.toString());
     let userR ={};
     userR['username'] = this.usernameR;
     userR['password'] = this.passwordR;
     userR['email'] = this.emailR;
-    userR['firstname'] = this.firstnameR;
-    userR['lastname'] = this.secondameR;
+    userR['firstName'] = this.firstnameR;
+    userR['lastName'] = this.secondnameR;
     userR['city'] = this.cityR;
-    userR['phonenumber'] = this.phoneR;
+    userR['phoneNumber'] = this.phoneR;
     userR['role'] = "USER";
     
     var js2xmlparser = require("js2xmlparser");
@@ -110,7 +110,7 @@ export class AppComponent {
     if(this.fileToUpload != null)
       this.uploadFileToActivity(xmlFile);
     else
-    this.registrationService.newUser(xmlFile, Number(1).toString()).subscribe(
+    this.registrationService.newUser(xmlFile, Number(-1).toString()).subscribe(
       (response) => {   },
       error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> User whit that username/email already exists! </div>";}
     
@@ -138,6 +138,7 @@ export class AppComponent {
   uploadFileToActivity(xmlFile: any) {
     this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
       this.imgId = data;
+      console.log(data)
       this.registrationService.newUser(xmlFile, this.imgId.toString()).subscribe(
        (response) => {   },
        error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>";}

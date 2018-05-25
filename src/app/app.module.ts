@@ -31,9 +31,11 @@ import { Interceptor } from "./core/inteceptor";
 import { TokenStorage } from "./core/token.storage";
 import { ErrorDialogComponent } from './core/error-dialog.component';
 import { UploadFileService } from './upload-file.service';
-import { UserRegistrationService } from './user-registration.service'
 import { ThumbnailAccommodationService } from './home/display/thumbnail-accommodation/thumbnail-accommodation.service';
 import { ImagesResolver } from './home/accommodation-profile/images-resolver.services';
+import { UserRegistrationService } from './user-registration.service'
+import { ProfileResolver } from './profile/profile-resolver.service';
+import { ProfileService } from './profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -66,9 +68,9 @@ import { ImagesResolver } from './home/accommodation-profile/images-resolver.ser
     MyDateRangePickerModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [ErrorDialogComponent, DisplayResolver, DisplayService, SearchService,
+  providers: [ProfileResolver, DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
-    UserRegistrationService, HomeService, TokenStorage, AuthService, ThumbnailAccommodationService, ImagesResolver, {
+    UserRegistrationService, HomeService, TokenStorage, ProfileService, AuthService, ThumbnailAccommodationService, ImagesResolver, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

@@ -15,8 +15,8 @@ export class ProfileService{
         
         let username = LoggedUtils.getUsername();
         let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.get("http://localhost:8080/api/abstractUser/user/"+username,{ headers : headers })
-        .map(res => res.json());
+        //headers.append('Content-Type', 'application/json');
+        return this.http.get("http://localhost:8080/api/abstractUser/user/"+username);
+        //.map(res => res.json());
     }
 }
