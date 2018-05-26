@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
 import { AccommodationProfileService } from './accommodation-profile.service';
 import { ActivatedRoute, Data } from '@angular/router';
-import { IMyDrpOptions, IMyDateRange, IMyDateRangeModel, IMyDateSelected } from 'mydaterangepicker';
+import { IMyDrpOptions, IMyDateRange, IMyDateRangeModel, IMyDateSelected, IMyDate } from 'mydaterangepicker';
 import { Reservation } from '../../model/reservation.model';
 import { BusyDates } from '../../model/busyDates.model';
 import { DatePipe } from '@angular/common';
@@ -21,6 +21,7 @@ export class AccommodationProfileComponent implements OnInit {
 
   private accommodation: Accommodation;
   private busyDates: BusyDates[] = null;
+  private freeDates: Date[] = null;
 
   private beginDate: string;
   private endDate: string;
@@ -36,16 +37,22 @@ export class AccommodationProfileComponent implements OnInit {
 
   private previewImages: string[];
 
+  private currentDate: Date = new Date();
+
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
-    disableDateRanges: [],
+    disableDateRanges: [{
+      beginDate: { year: this.currentDate.getFullYear(), month: this.currentDate.getMonth() + 1, day: this.currentDate.getDate() },
+      endDate: { year: 2100, month: 1, day: 1 }
+    }],
+    disableUntil: { year: this.currentDate.getFullYear(), month: this.currentDate.getMonth() + 1, day: this.currentDate.getDate() },
+    enableDates: [],
     alignSelectorRight: true,
     sunHighlight: true,
     markCurrentDay: true,
     inline: false,
     indicateInvalidDateRange: true,
     editableDateRangeField: false,
-
   };
 
   constructor(private route: ActivatedRoute,
@@ -58,21 +65,20 @@ export class AccommodationProfileComponent implements OnInit {
         this.accommodation = data.accommodationProfileResolver;
         this.accommodationProfileService.getBusyTerminsFromAccommodationId(this.accommodation.id).subscribe(
           (response) => {
-            this.busyDates = response.json();
-            let disableDateRanges: IMyDateRange[] = [];
-            for (let busyDate of this.busyDates) {
-              let beginDate: Date = new Date(busyDate.beginDate);
-              let endDate: Date = new Date(busyDate.endDate);
 
-              disableDateRanges.push({
-                beginDate: { year: beginDate.getFullYear(), month: beginDate.getMonth() + 1, day: beginDate.getDate() },
-                endDate: { year: endDate.getFullYear(), month: endDate.getMonth() + 1, day: endDate.getDate() }
-              })
+            this.freeDates = response.json();
+
+            let enableDates: IMyDate[] = [];
+            for (let freeDate of this.freeDates) {
+              let date: Date = new Date(freeDate);
+              enableDates.push({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() })
             }
+
             let clone = JSON.parse(JSON.stringify(this.myDateRangePickerOptions))
-            clone.disableDateRanges = disableDateRanges;
+            clone.enableDates = enableDates;
 
             this.myDateRangePickerOptions = clone;
+
           }
         )
       }
