@@ -27,12 +27,6 @@ export class AppComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  
-
-  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService, private fileUploadService: UploadFileService, private registrationService :UserRegistrationService) {}
-
-  @ViewChild("imageCanvas") imageCanvas;
-
   username: string = "";
   password: string = "";
   usernameR: string = "";
@@ -52,13 +46,47 @@ export class AppComponent {
 
   
 
+  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService, private fileUploadService: UploadFileService, private registrationService :UserRegistrationService) {
+    //console.log(JSON.parse(localStorage.getItem("loggedUser")).username);
+    try{
+      if(JSON.parse(localStorage.getItem("loggedUser")).username ==="")
+    {
+      this.sin  = false;
+      this.sup  = false;
+      this.lout  = true;
+      this.prof  = true;
+    }
+    else
+    {
+      this.sin  = true;
+      this.sup  = true;
+      this.lout  = false;
+      this.prof  = false;
+    }
+    }
+    catch(e){
+      e.message;
+    }
+    
+  }
+
+  @ViewChild("imageCanvas") imageCanvas;
+
+ 
+
+
+
+  
+
   
 
 
   login(): void {
     
     this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
-      data => localStorage.setItem("loggedUser", JSON.stringify(data)),
+      data => {
+        localStorage.setItem("loggedUser", JSON.stringify(data));
+      },
       error => this.badInput(),
       () => {
         this.callEmitter();

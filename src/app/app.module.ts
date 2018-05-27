@@ -36,6 +36,7 @@ import { ImagesResolver } from './home/accommodation-profile/images-resolver.ser
 import { UserRegistrationService } from './user-registration.service'
 import { ProfileResolver } from './profile/profile-resolver.service';
 import { ProfileService } from './profile/profile.service';
+import {LoggedUtils} from '../utils/logged.utils'
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { ProfileService } from './profile/profile.service';
     MyDateRangePickerModule
   ],
   entryComponents: [ErrorDialogComponent],
-  providers: [ProfileResolver, DisplayResolver, DisplayService, SearchService,
+  providers: [ProfileResolver, LoggedUtils, DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
     UserRegistrationService, HomeService, TokenStorage, ProfileService, AuthService, ThumbnailAccommodationService, ImagesResolver, {
       provide: HTTP_INTERCEPTORS,

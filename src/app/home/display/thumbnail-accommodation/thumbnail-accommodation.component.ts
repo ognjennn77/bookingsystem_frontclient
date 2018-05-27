@@ -24,7 +24,13 @@ export class ThumbnailAccommodationComponent implements OnInit {
     this.thuAccommodation.getImage(this.accommodation.id).subscribe(
       (response) => {
         let i: Image[] = response.json()
+        try{
         this.previewImage = `data:image/jpeg;base64,${i[0].image}`;
+        }
+        catch(e)
+        {
+          e.message;
+        }
         return;
       }
     )
