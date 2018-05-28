@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
     "js2xmlparser": "^3.0.0",
+    "levon-angular-star-rating": "^3.0.0",
     "mydatepicker": "^2.6.3",
     "mydaterangepicker": "^4.2.1",
     "ng-pick-datetime": "^5.2.6",
@@ -35,6 +36,7 @@
     "ngx-bootstrap": "^2.0.4",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",
+    "star-rating": "0.0.1",
     "xml2js": "^0.4.19",
     "zone.js": "^0.8.26"
   },
