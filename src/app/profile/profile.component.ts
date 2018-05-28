@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
     this.changeE  = true;
 
     console.log(JSON.parse(localStorage.getItem("loggedUser")).username);
+    console.log(JSON.parse(localStorage.getItem("loggedUser")).id);
 
   }
 
