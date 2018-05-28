@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { LoggedUtils } from "../../utils/logged.utils"
 import { Http, Headers } from '@angular/http';
 import { ProfileService } from './profile.service'
@@ -17,7 +17,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 export class ProfileComponent implements OnInit {
 
   user: User;
-  image: string = '../../assets/img/empty-profile.png'
+  image: string = 'assets/img/empty-profile.png'
   usernameE: boolean;
   firstnameE: boolean;
   lastnameE: boolean;
@@ -31,10 +31,12 @@ export class ProfileComponent implements OnInit {
   imgChanged: boolean = false;
 
   private reservations: Reservation[];
-  private rate: TemplateRef<any>;
-  private modalRef: BsModalRef;
 
-  constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService, ) {
+  private score: number = 0;
+  private comm: string = "";
+  @ViewChild('myModalClose') myModalClose: ElementRef;
+
+  constructor(private profileService: ProfileService, private route: ActivatedRoute) {
     this.usernameE = false;
     this.firstnameE = false;
     this.lastnameE = false;
@@ -44,8 +46,6 @@ export class ProfileComponent implements OnInit {
     this.editE = false;
     this.saveE = true;
     this.changeE = true;
-
-
   }
 
   ngOnInit() {
@@ -55,7 +55,8 @@ export class ProfileComponent implements OnInit {
         try {
           if ((this.user.image.image === null) || (this.user.image.image === "")) { }
           else
-            this.image = this.user.image.image;
+            this.image = `data:image/jpeg;base64,${this.user.image.image}`;
+          // this.image = this.user.image.image;
         }
         catch (e) {
           e.message;
@@ -64,11 +65,40 @@ export class ProfileComponent implements OnInit {
         this.profileService.getReservationForAccommodation(this.user.id).subscribe(
           (response) => {
             this.reservations = response.json();
-            this.modalRef = this.modalService.show(this.rate);
+            if (this.reservations.length > 0) {
+              document.getElementById("openModalButton").click();
+            }
           }
         )
       }
     )
+  }
+
+  clickStar(score: number) {
+    this.score = score;
+  }
+
+  late(reservation: Reservation) {
+    this.reservations.splice(this.reservations.indexOf(reservation), 1);
+    if (this.reservations.length == 0) {
+      this.myModalClose.nativeElement.click();
+    }
+  }
+
+  rate(reservation: Reservation) {
+    if (this.score != 0) {
+      let grade = this.score;
+      let comment = this.comm;
+      this.reservations.splice(this.reservations.indexOf(reservation), 1);
+      if (this.reservations.length == 0) {
+        this.myModalClose.nativeElement.click();
+      }
+
+      console.log(grade)
+      console.log(comment)
+
+      //kada napravim komentar sa ocenom, setovati u registraciju da je ocenjena i da se ne pojavljuje vise
+    }
   }
 
   edit() {

@@ -28,7 +28,7 @@
             <div class="box-body">
               <div class="col-sm-6">
                 <div align="center">
-                  <img alt="User Pic" src="data:image/JPEG;base64,{{image}}" id="profile-image1" class="img-circle img-responsive">
+                  <img alt="User Pic" [src]="image" id="profile-image1" class="img-circle img-responsive">
 
                   <input id="profile-image-upload" class="hidden" type="file">
                   <div [hidden]="changeE" style="color:#999;">click here to change profile image</div>
@@ -115,19 +115,50 @@
   </div>
 </div>
 
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-<ng-template #rate>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Rate your reservations</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-keyboard="false"
+  data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" #myModalClose>
+          <span arial-hidden="true">x</span>
+        </button>
+        <h4 class="modal-title pull-left">Rate your reservations</h4>
+      </div>
+      <div class="modoal-body">
+        <div class="modal-body">
+          <div *ngFor="let reservation of reservations">
+            <h4>Accommodation: {{reservation?.accommodation.name}}</h4>
+            <div class="section">
+              <div class="block">
+                <div class="stars">
+                  <form action="">
+                    <input class="star star-5" id="star-5" type="radio" name="star" (click)="clickStar(5)" />
+                    <label class="star star-5" for="star-5"></label>
+                    <input class="star star-4" id="star-4" type="radio" name="star" (click)="clickStar(4)" />
+                    <label class="star star-4" for="star-4"></label>
+                    <input class="star star-3" id="star-3" type="radio" name="star" (click)="clickStar(3)" />
+                    <label class="star star-3" for="star-3"></label>
+                    <input class="star star-2" id="star-2" type="radio" name="star" (click)="clickStar(2)" />
+                    <label class="star star-2" for="star-2"></label>
+                    <input class="star star-1" id="star-1" type="radio" name="star" (click)="clickStar(1)" />
+                    <label class="star star-1" for="star-1"></label>
+                  </form>
+                </div>
+                <div class="form-group">
+                  <label class="pull-left" for="comment">Comment:</label>
+                  <textarea class="form-control" rows="3" id="comment" [(ngModel)]="comm"></textarea>
+                </div>
+                <button type="button" class="pull-right" class="btn btn-success" (click)="rate(reservation)">Rate</button>
+                <button type="button" class="pull-right" class="btn btn-warning" (click)="late(reservation)">Late</button>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="modal-body">
-    valentian
-    <!-- <div *ngFor="let reservation of reservations">
-      <h4>Accommodation: </h4>
-      <bar-rating [(rate)]="cssRate" [max]="5"></bar-rating>
-    </div> -->
-  </div>
-</ng-template>
+</div>

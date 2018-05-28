@@ -122,7 +122,8 @@ export class AccommodationProfileComponent implements OnInit {
     reservation['beginDate'] = this.beginDate2.toISOString();
     reservation['endDate'] = this.endDate2.toISOString();
     reservation['accommodation'] = { id: this.accommodation.id }
-    //reservation['user'] = { id: JSON.parse(localStorage.getItem("loggedUser")).id }
+    reservation['user'] = { id: JSON.parse(localStorage.getItem("loggedUser")).id }
+    reservation['reservated'] = false;
 
     var js2xmlparser = require("js2xmlparser");
     let xmlFile = js2xmlparser.parse("reservation", reservation);

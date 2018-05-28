@@ -2,9 +2,9 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
 .modal-backdrop {
-    z-index: -100;
-    
-  }
+  /* bug fix - no overlay */    
+  display: none;    
+}
    .modal {
     text-align: center;
   }
