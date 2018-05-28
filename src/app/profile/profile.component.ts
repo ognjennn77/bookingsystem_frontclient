@@ -32,6 +32,8 @@ export class ProfileComponent implements OnInit {
 
   private reservations: Reservation[];
 
+  private res: Reservation[];
+
   private score: number = 0;
   private comm: string = "";
   @ViewChild('myModalClose') myModalClose: ElementRef;
@@ -62,11 +64,29 @@ export class ProfileComponent implements OnInit {
           e.message;
         }
 
+        this.profileService.getReservationForUser(this.user.id).subscribe(
+          (response) => {
+            try{
+              this.res = response.json();
+              console.log(this.res);
+            }
+            catch(e){
+              e.message;
+            }
+          }
+        )
+
         this.profileService.getReservationForAccommodation(this.user.id).subscribe(
           (response) => {
             this.reservations = response.json();
-            if (this.reservations.length > 0) {
-              document.getElementById("openModalButton").click();
+            try{
+              if (this.reservations.length > 0) {
+                document.getElementById("openModalButton").click();
+              }
+            }
+            catch(e)
+            {
+              e.message;
             }
           }
         )

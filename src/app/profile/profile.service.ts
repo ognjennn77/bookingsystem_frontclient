@@ -21,4 +21,9 @@ export class ProfileService {
         console.log(id)
         return this.http.get("http://localhost:8080/api/reservation/userId/" + id);
     }
+
+    getReservationForUser(id: number) { //pokupi sve rezervacije koje su prosle za ovog usera da ih oceni
+        console.log(id)
+        return this.http.get("http://localhost:8080/api/reservation/user/" + id);
+    }
 }
