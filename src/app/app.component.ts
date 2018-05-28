@@ -27,8 +27,6 @@ export class AppComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage, private authService: AuthService, private fileUploadService: UploadFileService, private registrationService: UserRegistrationService) { }
-
   @ViewChild("imageCanvas") imageCanvas;
 
   username: string = "";
@@ -47,6 +45,24 @@ export class AppComponent {
   fileToUpload: File = null;
   files: FileList;
   imgId: number = -1;
+
+  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage, private authService: AuthService, private fileUploadService: UploadFileService, private registrationService: UserRegistrationService) {
+    try {
+      if (JSON.parse(localStorage.getItem("loggedUser")).username === "") {
+        this.sin = false;
+        this.sup = false;
+        this.lout = true;
+        this.prof = true;
+      } else {
+        this.sin = true;
+        this.sup = true;
+        this.lout = false;
+        this.prof = false;
+      }
+    } catch (e) {
+      e.message;
+    }
+  }
 
   login(): void {
 

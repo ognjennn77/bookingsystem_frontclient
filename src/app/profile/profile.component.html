@@ -116,7 +116,7 @@
 </div>
 
 
-<ng-template #rating>
+<ng-template #rate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Rate your reservations</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -124,9 +124,10 @@
     </button>
   </div>
   <div class="modal-body">
-    <div *ngFor="let reservation of reservations">
-      <h4>Accommodation: reservation.accommodation</h4>
+    valentian
+    <!-- <div *ngFor="let reservation of reservations">
+      <h4>Accommodation: </h4>
       <bar-rating [(rate)]="cssRate" [max]="5"></bar-rating>
-    </div>
+    </div> -->
   </div>
 </ng-template>

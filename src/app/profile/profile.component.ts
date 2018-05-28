@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   imgChanged: boolean = false;
 
   private reservations: Reservation[];
-  private rating: TemplateRef<any>;
+  private rate: TemplateRef<any>;
   private modalRef: BsModalRef;
 
   constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService, ) {
@@ -44,6 +44,8 @@ export class ProfileComponent implements OnInit {
     this.editE = false;
     this.saveE = true;
     this.changeE = true;
+
+
   }
 
   ngOnInit() {
@@ -59,11 +61,10 @@ export class ProfileComponent implements OnInit {
           e.message;
         }
 
-        // console.log(this.user.id)
         this.profileService.getReservationForAccommodation(this.user.id).subscribe(
           (response) => {
             this.reservations = response.json();
-            this.modalRef = this.modalService.show(this.rating);
+            this.modalRef = this.modalService.show(this.rate);
           }
         )
       }
