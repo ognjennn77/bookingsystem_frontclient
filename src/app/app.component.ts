@@ -27,8 +27,6 @@ export class AppComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-
-
   constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage, private authService: AuthService, private fileUploadService: UploadFileService, private registrationService: UserRegistrationService) { }
 
   @ViewChild("imageCanvas") imageCanvas;
@@ -58,7 +56,9 @@ export class AppComponent {
   login(): void {
 
     this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
-      data => localStorage.setItem("loggedUser", JSON.stringify(data)),
+      data => {
+        localStorage.setItem("loggedUser", JSON.stringify(data));
+      },
       error => this.badInput(),
       () => {
         this.callEmitter();
