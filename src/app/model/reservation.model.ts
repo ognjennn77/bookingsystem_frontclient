@@ -7,6 +7,6 @@ export class Reservation {
         public endDate?: string,
         public user?: User,
         public accommodation?: Accommodation,
-        public reservated?: Boolean,
+        public rated?: Boolean,
     ) { }
 }
