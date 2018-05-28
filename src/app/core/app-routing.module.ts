@@ -9,7 +9,6 @@ import { ImagesResolver } from '../home/accommodation-profile/images-resolver.se
 import { ProfileComponent } from '../profile/profile.component'
 import { ProfileResolver } from '../profile/profile-resolver.service';
 
-
 const appRoutes: Routes = [
   {
     path: 'home', component: HomeComponent,

@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 export class UserRegistrationService {
     constructor(private http: Http) { }
 
-
     newUser(xmlFile: any, id: string) {
         const headers = new Headers();
         headers.append('Content-Type', 'text/xml');
@@ -17,9 +16,9 @@ export class UserRegistrationService {
         // '<password>Password</password>'
         // '</request>';
         console.log(xmlFile)
-        if(id != '-1')
-            return this.http.post('http://localhost:8080/api/abstractUser/new/'+id, xmlFile, options);
-        else 
+        if (id != '-1')
+            return this.http.post('http://localhost:8080/api/abstractUser/new/' + id, xmlFile, options);
+        else
             return this.http.post('http://localhost:8080/api/abstractUser/new', xmlFile, options);
     }
 
