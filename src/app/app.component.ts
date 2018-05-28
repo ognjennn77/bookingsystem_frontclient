@@ -48,11 +48,6 @@ export class AppComponent {
   files: FileList;
   imgId: number = -1;
 
-
-
-
-
-
   login(): void {
 
     this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
