@@ -4,96 +4,129 @@
 
 
 <div class="container">
-	<div class="row">
-		<h2>        </h2>
-        
-        
-       <div class="col-md-7 ">
+  <div class="row">
+    <h2> </h2>
 
-<div class="panel panel-default">
-  <div class="panel-heading">  <h4 >User Profile 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-    <button (click)="edit()" [hidden]="editE"><img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/edit-24.png"/></button>
-    <button (click)="save()" [hidden]="saveE"><img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/floppy-24.png"/></button></h4> </div>
-   <div class="panel-body">
-       
-    <div class="box box-info">
-        
+
+    <div class="col-md-7 ">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>User Profile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button (click)="edit()" [hidden]="editE">
+              <img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/edit-24.png" />
+            </button>
+            <button (click)="save()" [hidden]="saveE">
+              <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/floppy-24.png" />
+            </button>
+          </h4>
+        </div>
+        <div class="panel-body">
+
+          <div class="box box-info">
+
             <div class="box-body">
-                     <div class="col-sm-6">
-                     <div  align="center"> <img alt="User Pic" src="data:image/JPEG;base64,{{image}}"  id="profile-image1" class="img-circle img-responsive"> 
-                
-                <input id="profile-image-upload"  class="hidden" type="file">
-<div [hidden]="changeE" style="color:#999;" >click here to change profile image</div>
-                <!--Upload Image Js And Css-->
-           
-              
-   
-                
-                
-                     
-                     
-                     </div>
-              
-              <br>
-    
-              <!-- /input-group -->
+              <div class="col-sm-6">
+                <div align="center">
+                  <img alt="User Pic" src="data:image/JPEG;base64,{{image}}" id="profile-image1" class="img-circle img-responsive">
+
+                  <input id="profile-image-upload" class="hidden" type="file">
+                  <div [hidden]="changeE" style="color:#999;">click here to change profile image</div>
+                  <!--Upload Image Js And Css-->
+
+
+
+
+
+
+
+                </div>
+
+                <br>
+
+                <!-- /input-group -->
+              </div>
+              <div class="col-sm-6">
+                <span>
+                  <h4 style="color:#00b1b1;"> {{user.firstName}} {{user.lastName}} </h4>
+                </span>
+                <span>
+                  <p>{{user.role}}</p>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+              <hr style="margin:5px 0 5px 0;">
+
+              <div class="col-sm-5 col-xs-6 tital ">Username:</div>
+              <div [attr.contenteditable]="usernameE" class="col-sm-7 col-xs-6 ">{{user.username}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
+              <div [attr.contenteditable]="firstnameE" class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
+
+              <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
+              <div [attr.contenteditable]="lastnameE" class="col-sm-7"> {{user.lastName}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
+
+
+              <div class="col-sm-5 col-xs-6 tital ">Email adress:</div>
+              <div [attr.contenteditable]="emailE" class="col-sm-7">{{user.email}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
+
+
+              <div class="col-sm-5 col-xs-6 tital ">Phone number:</div>
+              <div [attr.contenteditable]="phoneE" class="col-sm-7">{{user.phoneNumber}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
+
+
+              <div class="col-sm-5 col-xs-6 tital ">City:</div>
+              <div [attr.contenteditable]="cityE" class="col-sm-7">{{user.city}}</div>
+
+
+
+
+              <!-- /.box-body -->
             </div>
-            <div class="col-sm-6">
-            <span><h4 style="color:#00b1b1;"> {{user.firstName}}   {{user.lastName}} </h4></span>
-              <span><p>{{user.role}}</p></span>            
-            </div>
-            <div class="clearfix"></div>
-            <hr style="margin:5px 0 5px 0;">
-    
-<div class="col-sm-5 col-xs-6 tital " >Username:</div><div [attr.contenteditable]="usernameE" class="col-sm-7 col-xs-6 ">{{user.username}}</div>
-      <div class="clearfix"></div>
-<div class="bot-border"></div>              
-<div class="col-sm-5 col-xs-6 tital " >First Name:</div><div [attr.contenteditable]="firstnameE" class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div>
+            <!-- /.box -->
 
-
-<div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div [attr.contenteditable]="lastnameE" class="col-sm-7"> {{user.lastName}}</div>
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-
-
-<div class="col-sm-5 col-xs-6 tital " >Email adress:</div><div [attr.contenteditable]="emailE" class="col-sm-7">{{user.email}}</div>
-<div class="clearfix"></div>
-<div class="bot-border"></div>
-
-
-
-<div class="col-sm-5 col-xs-6 tital " >Phone number:</div><div [attr.contenteditable]="phoneE" class="col-sm-7">{{user.phoneNumber}}</div>
-<div class="clearfix"></div>
-<div class="bot-border"></div>
-
-
-
-<div class="col-sm-5 col-xs-6 tital " >City:</div><div [attr.contenteditable]="cityE" class="col-sm-7">{{user.city}}</div>
-
-
-
-
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
+
 
         </div>
-       
-            
-    </div> 
+      </div>
     </div>
-</div>  
     <script>
-              $(function() {
-                $('#profile-image1').on('click', function() {
-                    $('#profile-image-upload').click();
-                });
-            });       
-    </script> 
+      $(function () {
+        $('#profile-image1').on('click', function () {
+          $('#profile-image-upload').click();
+        });
+      });       
+    </script>
 
-   </div>
+  </div>
 </div>
+
+
+<ng-template #rating>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Rate your reservations</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let reservation of reservations">
+      <h4>Accommodation: reservation.accommodation</h4>
+      <bar-rating [(rate)]="cssRate" [max]="5"></bar-rating>
+    </div>
+  </div>
+</ng-template>

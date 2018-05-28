@@ -36,6 +36,7 @@ import { ImagesResolver } from './home/accommodation-profile/images-resolver.ser
 import { UserRegistrationService } from './user-registration.service'
 import { ProfileResolver } from './profile/profile-resolver.service';
 import { ProfileService } from './profile/profile.service';
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ProfileService } from './profile/profile.service';
     ModalModule.forRoot(),
     MyDatePickerModule,
     HttpClientModule,
-    MyDateRangePickerModule
+    MyDateRangePickerModule,
+    BarRatingModule
   ],
   entryComponents: [ErrorDialogComponent],
   providers: [ProfileResolver, DisplayResolver, DisplayService, SearchService,

@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Accommodation } from '../../model/accommodation.model';
 import { AccommodationProfileService } from './accommodation-profile.service';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { IMyDrpOptions, IMyDateRange, IMyDateRangeModel, IMyDateSelected, IMyDate } from 'mydaterangepicker';
 import { Reservation } from '../../model/reservation.model';
 import { BusyDates } from '../../model/busyDates.model';
@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import { format } from 'util';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Image } from '../../model/image.model';
+import { LoggedUtils } from '../../../utils/logged.utils';
 
 declare var require: any;
 
@@ -39,6 +40,8 @@ export class AccommodationProfileComponent implements OnInit {
 
   private currentDate: Date = new Date();
 
+  private modalRefLog: BsModalRef;
+
   private myDateRangePickerOptions: IMyDrpOptions = {
     dateFormat: 'dd.mm.yyyy',
     disableDateRanges: [{
@@ -57,7 +60,7 @@ export class AccommodationProfileComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private accommodationProfileService: AccommodationProfileService,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(
@@ -101,27 +104,28 @@ export class AccommodationProfileComponent implements OnInit {
   }
 
   reserve(template: TemplateRef<any>) {
-    this.accommodationProfileService.getPriceForTermine(this.accommodation.id, this.beginDate, this.endDate).subscribe(
-      (response) => {
-        this.totalPrice = response.json();
-
-
-        this.modalRef = this.modalService.show(template);
-      }
-    )
+    if (localStorage.getItem("loggedUser")) {
+      this.accommodationProfileService.getPriceForTermine(this.accommodation.id, this.beginDate, this.endDate).subscribe(
+        (response) => {
+          this.totalPrice = response.json();
+          this.modalRef = this.modalService.show(template);
+        }
+      )
+    } else {
+      this.router.navigate(['/home']);
+      //dodati otvaranje dialoga za logovanje
+    }
   }
 
   makeReservation() {
     let reservation = {}
-
     reservation['beginDate'] = this.beginDate2.toISOString();
     reservation['endDate'] = this.endDate2.toISOString();
-
-    reservation['accommodation'] = { id: this.accommodation.id };
-    //  reservation.user = 
+    reservation['accommodation'] = { id: this.accommodation.id }
+    // console.log(LoggedUtils.getId())
+    // reservation['user'] = { id: localStorage.getItem("loggedUser") }
 
     var js2xmlparser = require("js2xmlparser");
-
     let xmlFile = js2xmlparser.parse("reservation", reservation);
 
     this.accommodationProfileService.newReservation(xmlFile).subscribe(

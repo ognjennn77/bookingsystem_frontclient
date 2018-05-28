@@ -2,14 +2,14 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {AuthService} from './core/auth.service';
-import {TokenStorage} from './core/token.storage';
-import {Router} from '@angular/router';
+import { AuthService } from './core/auth.service';
+import { TokenStorage } from './core/token.storage';
+import { Router } from '@angular/router';
 import { UploadFileService } from './upload-file.service';
-import {UserRegistrationService} from './user-registration.service'
+import { UserRegistrationService } from './user-registration.service'
 
 
-import { Login} from './model/login.model'
+import { Login } from './model/login.model'
 
 declare var require: any;
 
@@ -27,9 +27,9 @@ export class AppComponent {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  
 
-  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage,private authService: AuthService, private fileUploadService: UploadFileService, private registrationService :UserRegistrationService) {}
+
+  constructor(private modalService: BsModalService, private router: Router, private token: TokenStorage, private authService: AuthService, private fileUploadService: UploadFileService, private registrationService: UserRegistrationService) { }
 
   @ViewChild("imageCanvas") imageCanvas;
 
@@ -42,21 +42,21 @@ export class AppComponent {
   secondnameR: string = "";
   cityR: string = "";
   phoneR: string = "";
-  sin : boolean = false;
-  sup : boolean = false;
-  lout : boolean = true;
-  prof : boolean = true;
+  sin: boolean = false;
+  sup: boolean = false;
+  lout: boolean = true;
+  prof: boolean = true;
   fileToUpload: File = null;
   files: FileList;
-  imgId : number = -1;
+  imgId: number = -1;
 
-  
 
-  
+
+
 
 
   login(): void {
-    
+
     this.authService.attemptAuth(new Login(this.username, this.password)).subscribe(
       data => localStorage.setItem("loggedUser", JSON.stringify(data)),
       error => this.badInput(),
@@ -66,22 +66,20 @@ export class AppComponent {
     );
   }
 
-  logout(): void{
+  logout(): void {
     this.sin = false;
     this.sup = false;
     this.lout = true;
-    this.prof  = true;
+    this.prof = true;
     this.router.navigate(['/home']);
     localStorage.clear();
   }
 
-  badInput()
-  {
+  badInput() {
     document.getElementById("login").innerHTML = "<div align=\"center\" class=\"alert alert-danger \"> Wrong email/password! </div>";
   }
 
-  callEmitter()
-  {
+  callEmitter() {
     this.modalRef.hide()
     this.sin = true;
     this.sup = true;
@@ -90,12 +88,12 @@ export class AppComponent {
     this.router.navigate(['/profile'])
     this.authService.emitRole(this.username);
   }
-  
 
-  register(): void{
-    
+
+  register(): void {
+
     //console.log(this.imgId.toString());
-    let userR ={};
+    let userR = {};
     userR['username'] = this.usernameR;
     userR['password'] = this.passwordR;
     userR['email'] = this.emailR;
@@ -104,34 +102,29 @@ export class AppComponent {
     userR['city'] = this.cityR;
     userR['phoneNumber'] = this.phoneR;
     userR['role'] = "USER";
-    
+
     var js2xmlparser = require("js2xmlparser");
     let xmlFile = js2xmlparser.parse("abstractuser", userR);
-    if(this.fileToUpload != null)
+    if (this.fileToUpload != null)
       this.uploadFileToActivity(xmlFile);
     else
-    this.registrationService.newUser(xmlFile, Number(-1).toString()).subscribe(
-      (response) => {   },
-      error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> User whit that username/email already exists! </div>";}
-    
-    )
-
-    
+      this.registrationService.newUser(xmlFile, Number(-1).toString()).subscribe(
+        (response) => { },
+        error => { document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> User whit that username/email already exists! </div>"; }
+      )
   }
-  
 
-  preview(event: any): void{
+  preview(event: any): void {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-  
-      reader.onload = (event:any) => {
+
+      reader.onload = (event: any) => {
         this.url = event.target.result;
       }
-  
+
       reader.readAsDataURL(event.target.files[0]);
-       this.files = event.target.files;
+      this.files = event.target.files;
       this.fileToUpload = this.files.item(0);
-      
     }
   }
 
@@ -140,22 +133,21 @@ export class AppComponent {
       this.imgId = data;
       console.log(data)
       this.registrationService.newUser(xmlFile, this.imgId.toString()).subscribe(
-       (response) => {   },
-       error => {document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>";}
-       
-     )
-      
-      }, error => {
-        console.log(error);
-      });
+        (response) => { },
+        error => { document.getElementById("reg").innerHTML = "<div class=\"alert alert-danger \"> Wrong email/password! </div>"; }
+      )
+
+    }, error => {
+      console.log(error);
+    });
   }
-  
+
   openModal(template: TemplateRef<any>) {
-      this.username = "";
-      this.password =  "";
-      this.modalRef = this.modalService.show(template);
-      this.initLogIn();
-      this.initRegister();
+    this.username = "";
+    this.password = "";
+    this.modalRef = this.modalService.show(template);
+    this.initLogIn();
+    this.initRegister();
   }
 
   initLogIn() {
@@ -176,6 +168,4 @@ export class AppComponent {
       'phone': new FormControl(null, [Validators.required]),
     })
   }
-  
 }
-
