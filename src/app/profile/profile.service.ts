@@ -23,7 +23,7 @@ export class ProfileService {
     }
 
     getReservationForUser(id: number) { //pokupi sve rezervacije koje su prosle za ovog usera da ih oceni
-        console.log(id)
-        return this.http.get("http://localhost:8080/api/reservation/user/" + id);
+        // console.log(id)
+        return this.http.get("http://localhost:8080/api/reservation/userReservations/" + id);
     }
 }
