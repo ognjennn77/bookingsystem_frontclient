@@ -145,43 +145,50 @@
       <div class="panel panel-primary" >
       <div class="panel-heading clearfix" >
           <h2 class="panel-title pull-left">Messages</h2>
+          
           <!-- <h2 class="panel-title pull-right">Messages</h2> -->
-          <button class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i></button>
+          <button (click)="openModal(newMessage)" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i></button>
+          <select id="PTOtype" class=" btn-primary col-md-5 col-md-offset-1">
+              <option *ngFor="let u of usrs">
+                {{u.firstName}}  {{u.lastName}}
+              </option>
+            </select>
+            
         </div>
         <table class="table table-fixed">
-            <thead>
+            <!-- <thead>
               <tr>
-                <th >Name</th>
+                <th  >Name</th>
               </tr>
-            </thead>
+            </thead> -->
             <tbody>
               <tr>
                 <td class="col-xs-12">Mike Adams</td>
               </tr>
               <tr>
-                  <td class="col-xs-12">Mike Adams</td>
-                </tr>
-                <tr>
-                    <td class="col-xs-12">Mike Adams</td>
-                  </tr>
-                  <tr>
-                      <td class="col-xs-12">Mike Adams</td>
-                    </tr>
-                    <tr>
-                        <td class="col-xs-12">Mike Adams</td>
-                      </tr>
-                      <tr>
-                          <td class="col-xs-12">Mike Adams</td>
-                        </tr>
-                        <tr>
-                            <td class="col-xs-12">Mike Adams</td>
-                          </tr>
-                          <tr>
-                              <td class="col-xs-12">Mike Adams</td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-12">Mike Adams</td>
-                              </tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
+              <tr>
+                <td class="col-xs-12">Mike Adams</td>
+              </tr>
                 
             
             </tbody>
@@ -297,6 +304,37 @@
     });
   });
 </script>
+
+
+
+<ng-template #newMessage>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">New Message</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+      <form [formGroup]="newMessageForm" role="form">
+          <div class="form-group">
+              <select id="comboModal" class="form-control">
+                  <option *ngFor="let u of usrs">
+                      {{u.firstName}}  {{u.lastName}}
+                    </option>
+                </select>
+          </div>
+          <div class="form-group">
+              <label for="msg">Message:</label>
+              <textarea class="form-control" formControlName="message" rows="5" id="message"></textarea>
+            </div>
+        <div class="modal-footer" role="group">
+          <button class="btn btn-primary btn-block" (click)="send()" [disabled]="!newMessageForm.valid">Send</button>
+        </div>
+        
+      </form>
+    </div>
+  </ng-template>
 
 
 

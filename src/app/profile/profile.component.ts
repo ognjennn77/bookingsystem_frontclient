@@ -7,6 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Data } from '@angular/router';
 import { Reservation } from '../model/reservation.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -30,15 +33,19 @@ export class ProfileComponent implements OnInit {
   cc: boolean = true;
   imgChanged: boolean = false;
 
+  modalRef: BsModalRef;
+  newMessageForm : FormGroup;
+
   private reservations: Reservation[];
 
   private res: Reservation[];
+  private usrs: User[]=[];
 
   private score: number = 0;
   private comm: string = "";
   @ViewChild('myModalClose') myModalClose: ElementRef;
 
-  constructor(private profileService: ProfileService, private route: ActivatedRoute) {
+  constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService) {
     this.usernameE = false;
     this.firstnameE = false;
     this.lastnameE = false;
@@ -68,9 +75,32 @@ export class ProfileComponent implements OnInit {
           (response) => {
             try{
               this.res = response.json();
-              console.log(this.res);
+              this.usrs = [];
+              
+
+              this.res.forEach(element => {
+                var keepGoing = true;
+                // console.log(element.accommodation.agent);
+                // console.log(this.usrs);
+                // console.log(this.usrs.indexOf(element.accommodation.agent));
+                if(this.usrs.length ==0)
+                  this.usrs.push(element.accommodation.agent);
+                else
+                  this.usrs.forEach(item => {
+                    if(keepGoing)
+                      if(item.id == element.accommodation.agent.id){
+                        keepGoing = false;
+                      }
+                      else{
+                        this.usrs.push(element.accommodation.agent);
+                      }
+                  });
+                  
+              });
+              console.log(this.usrs);
             }
             catch(e){
+              console.log(e);
               e.message;
             }
           }
@@ -146,5 +176,20 @@ export class ProfileComponent implements OnInit {
 
     location.reload();
   }
+
+  openModal(template: TemplateRef<any>) {
+    
+    this.modalRef = this.modalService.show(template);
+    this.initMess();
+  }
+
+
+  initMess() {
+    this.newMessageForm = new FormGroup({
+      'message': new FormControl(null, [Validators.required]),
+    })
+  }
+
+  send(){}
 
 }

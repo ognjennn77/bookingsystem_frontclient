@@ -3,6 +3,7 @@ import { AdditionalServices } from "./additionalServices.model";
 import { AccommodationCategory } from "./accommodationCategory.model";
 import { AccommodationType } from "./accommodationType.model";
 import { Reservation } from "./reservation.model";
+import { User } from "./user.model";
 
 export class Accommodation {
     constructor(public id?: number,
@@ -14,5 +15,7 @@ export class Accommodation {
         public additionalServices?: Array<AdditionalServices>,
         public accommodationCategory?: AccommodationCategory,
         public accommodationType?: AccommodationType,
+        public agent?: User,
         public reservations?: Array<Reservation>) { }
+        
 }
