@@ -148,47 +148,26 @@
           
           <!-- <h2 class="panel-title pull-right">Messages</h2> -->
           <button (click)="openModal(newMessage)" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i></button>
-          <select id="PTOtype" class=" btn-primary col-md-5 col-md-offset-1">
-              <option *ngFor="let u of usrs">
-                {{u.firstName}}  {{u.lastName}}
+          <select id="PTOtype" class=" btn-primary col-md-7 col-md-offset-1" [(ngModel)]="selectedRes" (ngModelChange)="getResId($event)">
+              
+              <option *ngFor="let r of res" [value]="r.id" >
+                  {{r?.accommodation.name}} {{r?.beginDate}} => {{r?.endDate}}
               </option>
             </select>
             
         </div>
-        <table class="table table-fixed">
+        <table #datatable class="table table-fixed">
             <!-- <thead>
               <tr>
                 <th  >Name</th>
               </tr>
             </thead> -->
             <tbody>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
+              <tr *ngFor="let m of Messages">
+                <td *ngIf="m.sendRole=='AGENT';" style="background-color: #BBB" class="col-xs-12">{{m.text}}</td>
+                <td *ngIf="m.sendRole=='USER';"  class="col-xs-12">{{m.text}}</td>
               </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
-              <tr>
-                <td class="col-xs-12">Mike Adams</td>
-              </tr>
+              
                 
             
             </tbody>
@@ -317,16 +296,16 @@
     <div class="modal-body">
       
       <form [formGroup]="newMessageForm" role="form">
-          <div class="form-group">
-              <select id="comboModal" class="form-control">
-                  <option *ngFor="let u of usrs">
-                      {{u.firstName}}  {{u.lastName}}
+          <div>
+              <select id="comboModal" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedRes" (ngModelChange)="getResIdModal($event)">
+                  <option *ngFor="let r of res" [value]="r.id">
+                      {{r?.accommodation.name}} from {{r?.beginDate}} to {{r?.endDate}}
                     </option>
                 </select>
           </div>
           <div class="form-group">
               <label for="msg">Message:</label>
-              <textarea class="form-control" formControlName="message" rows="5" id="message"></textarea>
+              <textarea class="form-control" formControlName="message" rows="5" [(ngModel)]="message" id="message"></textarea>
             </div>
         <div class="modal-footer" role="group">
           <button class="btn btn-primary btn-block" (click)="send()" [disabled]="!newMessageForm.valid">Send</button>

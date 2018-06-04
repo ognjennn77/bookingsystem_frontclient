@@ -26,4 +26,16 @@ export class ProfileService {
         // console.log(id)
         return this.http.get("http://localhost:8080/api/reservation/userReservations/" + id);
     }
+
+    getInbox(resId: number){
+        return this.http.get("http://localhost:8080/api/inbox/getByRes/"+resId);
+    }
+
+    sendMessage(xmlFile: any,resId: number){
+        const headers = new Headers();
+        headers.append('Content-Type', 'text/xml');
+        headers.append('Accept', 'text/xml');
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post("http://localhost:8080/api/inbox/newmessage/" +resId, xmlFile, options);
+    }
 }

@@ -10,6 +10,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Message } from '../model/message.model';
+
+declare var require: any;
+
 
 @Component({
   selector: 'app-profile',
@@ -37,13 +41,22 @@ export class ProfileComponent implements OnInit {
   newMessageForm : FormGroup;
 
   private reservations: Reservation[];
+  private Messages: Message[] = [];
 
   private res: Reservation[];
   private usrs: User[]=[];
 
   private score: number = 0;
   private comm: string = "";
+
+  private selectedRes: number;
+
+
+  private message: string;
+  private selModal: number;
+  private loggUser: number;
   @ViewChild('myModalClose') myModalClose: ElementRef;
+  @ViewChild('datatable') table;
 
   constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService) {
     this.usernameE = false;
@@ -190,6 +203,45 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  send(){}
+  send(){
+    console.log(this.message);
+    let messg = {};
+    messg['text'] = this.message;
+    messg['sendRole'] = JSON.parse(localStorage.getItem("loggedUser")).role;;
+    messg['date'] = new Date().toISOString();
+
+    var js2xmlparser = require("js2xmlparser");
+    let xmlFile = js2xmlparser.parse("message", messg);
+
+
+    this.profileService.sendMessage(xmlFile, this.selectedRes).subscribe(
+      (response) => {
+        console.log(response);
+        this.getResId(this.selectedRes);
+      } 
+    )
+
+    this.modalRef.hide();
+
+  }
+
+  getResId(event){
+    console.log('selected employee: ' + event);
+    this.profileService.getInbox(event).subscribe(
+      (response) => {
+        
+        this.Messages = response.json();
+        console.log(this.Messages);
+      }
+
+    )
+  }
+
+  getResIdModal(event){
+    this.selModal = event;
+    this.loggUser = JSON.parse(localStorage.getItem("loggedUser")).id;
+    // console.log('selected: ' + event);
+    // console.log('user id:' + JSON.parse(localStorage.getItem("loggedUser")).id);
+  }
 
 }
