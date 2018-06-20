@@ -38,6 +38,7 @@ import { ProfileResolver } from './profile/profile-resolver.service';
 import { ProfileService } from './profile/profile.service';
 import { BarRatingModule } from "ngx-bar-rating";
 import { LoggedUtils } from '../utils/logged.utils'
+import { RatingResolver } from './home/accommodation-profile/comment-resolver';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { LoggedUtils } from '../utils/logged.utils'
   entryComponents: [ErrorDialogComponent],
   providers: [ProfileResolver, LoggedUtils, DisplayResolver, DisplayService, SearchService,
     AccommodationProfileService, AccommodationProfileResolver, UploadFileService,
-    UserRegistrationService, HomeService, TokenStorage, ProfileService, AuthService, ThumbnailAccommodationService, ImagesResolver, {
+    UserRegistrationService, HomeService, TokenStorage, ProfileService, AuthService, RatingResolver, ThumbnailAccommodationService, ImagesResolver, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

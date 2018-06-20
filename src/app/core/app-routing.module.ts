@@ -8,13 +8,14 @@ import { AccommodationProfileResolver } from '.././home/accommodation-profile/ac
 import { ImagesResolver } from '../home/accommodation-profile/images-resolver.services';
 import { ProfileComponent } from '../profile/profile.component'
 import { ProfileResolver } from '../profile/profile-resolver.service';
+import { RatingResolver } from '../home/accommodation-profile/comment-resolver';
 
 const appRoutes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
       { path: '', component: DisplayComponent, runGuardsAndResolvers: 'paramsOrQueryParamsChange', resolve: { displayResolver: DisplayResolver } },
-      { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver, imageResolver: ImagesResolver } },
+      { path: ':id', component: AccommodationProfileComponent, resolve: { accommodationProfileResolver: AccommodationProfileResolver, imageResolver: ImagesResolver, ratingResolver: RatingResolver } },
     ]
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

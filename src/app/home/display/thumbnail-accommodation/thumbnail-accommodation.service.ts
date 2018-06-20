@@ -10,4 +10,8 @@ export class ThumbnailAccommodationService {
     getImage(idAccommodation: number) {
         return this.http.get('http://localhost:8080/api/image/search/' + idAccommodation)
     }
+
+    getAvarageGrade(idAccommodation: number) {
+        return this.http.get('http://localhost:8080/api/rating/allRating/' + idAccommodation + '/avg')
+    }
 }

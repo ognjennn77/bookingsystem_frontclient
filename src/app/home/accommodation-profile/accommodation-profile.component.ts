@@ -10,6 +10,7 @@ import { format } from 'util';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Image } from '../../model/image.model';
 import { LoggedUtils } from '../../../utils/logged.utils';
+import { Rating } from '../../model/rating.model';
 
 declare var require: any;
 
@@ -23,6 +24,8 @@ export class AccommodationProfileComponent implements OnInit {
   private accommodation: Accommodation;
   private busyDates: BusyDates[] = null;
   private freeDates: Date[] = null;
+
+  private rating: Rating[] = null;
 
   private beginDate: string;
   private endDate: string;
@@ -72,9 +75,11 @@ export class AccommodationProfileComponent implements OnInit {
             this.freeDates = response.json();
 
             let enableDates: IMyDate[] = [];
-            for (let freeDate of this.freeDates) {
-              let date: Date = new Date(freeDate);
-              enableDates.push({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() })
+            if (this.freeDates) {
+              for (let freeDate of this.freeDates) {
+                let date: Date = new Date(freeDate);
+                enableDates.push({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() })
+              }
             }
 
             let clone = JSON.parse(JSON.stringify(this.myDateRangePickerOptions))
@@ -84,6 +89,8 @@ export class AccommodationProfileComponent implements OnInit {
 
           }
         )
+        // kupljenje svih ratinga za dati smestaj radi prikaza
+        this.rating = data.ratingResolver;
       }
     )
 

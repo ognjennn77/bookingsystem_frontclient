@@ -11,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Message } from '../model/message.model';
+import { Rating } from '../model/rating.model';
 
 declare var require: any;
 
@@ -38,13 +39,13 @@ export class ProfileComponent implements OnInit {
   imgChanged: boolean = false;
 
   modalRef: BsModalRef;
-  newMessageForm : FormGroup;
+  newMessageForm: FormGroup;
 
   private reservations: Reservation[];
   private Messages: Message[] = [];
 
   private res: Reservation[];
-  private usrs: User[]=[];
+  private usrs: User[] = [];
 
   private score: number = 0;
   private comm: string = "";
@@ -86,33 +87,33 @@ export class ProfileComponent implements OnInit {
 
         this.profileService.getReservationForUser(this.user.id).subscribe(
           (response) => {
-            try{
+            try {
               this.res = response.json();
               this.usrs = [];
-              
+
 
               this.res.forEach(element => {
                 var keepGoing = true;
                 // console.log(element.accommodation.agent);
                 // console.log(this.usrs);
                 // console.log(this.usrs.indexOf(element.accommodation.agent));
-                if(this.usrs.length ==0)
+                if (this.usrs.length == 0)
                   this.usrs.push(element.accommodation.agent);
                 else
                   this.usrs.forEach(item => {
-                    if(keepGoing)
-                      if(item.id == element.accommodation.agent.id){
+                    if (keepGoing)
+                      if (item.id == element.accommodation.agent.id) {
                         keepGoing = false;
                       }
-                      else{
+                      else {
                         this.usrs.push(element.accommodation.agent);
                       }
                   });
-                  
+
               });
-              console.log(this.usrs);
+              // console.log(this.usrs);
             }
-            catch(e){
+            catch (e) {
               console.log(e);
               e.message;
             }
@@ -122,13 +123,13 @@ export class ProfileComponent implements OnInit {
         this.profileService.getReservationForAccommodation(this.user.id).subscribe(
           (response) => {
             this.reservations = response.json();
-            try{
+            // console.log(this.reservations)
+            try {
               if (this.reservations.length > 0) {
                 document.getElementById("openModalButton").click();
               }
             }
-            catch(e)
-            {
+            catch (e) {
               e.message;
             }
           }
@@ -156,9 +157,47 @@ export class ProfileComponent implements OnInit {
       if (this.reservations.length == 0) {
         this.myModalClose.nativeElement.click();
       }
+      // console.log(grade)
+      // console.log(comment)
 
-      console.log(grade)
-      console.log(comment)
+      let rating = {};
+      rating['grade'] = grade;
+      rating['content'] = comment;
+      rating['rezervacija'] = reservation.id;
+      rating['accommodation'] = reservation.accommodation.id;
+      rating['korisnik'] = JSON.parse(localStorage.getItem("loggedUser")).id;
+
+      var js2xmlparser = require("js2xmlparser");
+      let xmlFile = js2xmlparser.parse("rating", rating);
+
+      this.profileService.newCommentRate(xmlFile).subscribe(
+        (response) => {
+
+          let reservationT = {}
+          reservationT['id'] = reservation.id;
+          reservationT['beginDate'] = reservation.beginDate;
+          reservationT['endDate'] = reservation.endDate;
+          reservationT['accommodation'] = { id: reservation.accommodation.id };
+          reservationT['user'] = { id: JSON.parse(localStorage.getItem("loggedUser")).id };
+          reservationT['rated'] = true;
+
+
+          let xmlFile1 = js2xmlparser.parse("reservation", reservationT);
+          this.profileService.updateReservation(xmlFile1).subscribe(
+            (response) => {
+
+              this.reservations.forEach(r => {
+                if (r.id == response.json().id) {
+                  r.rated = true;
+                }
+              })
+            }
+          )
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
 
       //kada napravim komentar sa ocenom, setovati u registraciju da je ocenjena i da se ne pojavljuje vise
     }
@@ -191,7 +230,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    
+
     this.modalRef = this.modalService.show(template);
     this.initMess();
   }
@@ -203,8 +242,8 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  send(){
-    console.log(this.message);
+  send() {
+    // console.log(this.message);
     let messg = {};
     messg['text'] = this.message;
     messg['sendRole'] = JSON.parse(localStorage.getItem("loggedUser")).role;;
@@ -216,20 +255,20 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.sendMessage(xmlFile, this.selectedRes).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.getResId(this.selectedRes);
-      } 
+      }
     )
 
     this.modalRef.hide();
 
   }
 
-  getResId(event){
-    console.log('selected employee: ' + event);
+  getResId(event) {
+    // console.log('selected employee: ' + event);
     this.profileService.getInbox(event).subscribe(
       (response) => {
-        
+
         this.Messages = response.json();
         console.log(this.Messages);
       }
@@ -237,7 +276,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  getResIdModal(event){
+  getResIdModal(event) {
     this.selModal = event;
     this.loggUser = JSON.parse(localStorage.getItem("loggedUser")).id;
     // console.log('selected: ' + event);
