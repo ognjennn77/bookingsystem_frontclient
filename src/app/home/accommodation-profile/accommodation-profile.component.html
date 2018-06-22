@@ -92,11 +92,11 @@
       <ul id="comments-list" class="comments-list">
         <li>
           <!-- <div class="comment-main-level"> -->
-          <!-- Contenedor del Comentario -->
-          <div class="comment-box">
-            <div *ngFor="let rat of rating" class="comment-content">
+          <div *ngFor="let rat of rating" class="comment-box">
+            <div class="comment-content">
               {{rat.content}}
             </div>
+            <br>
           </div>
           <!-- </div> -->
       </ul>
