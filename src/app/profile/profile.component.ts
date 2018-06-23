@@ -270,7 +270,7 @@ export class ProfileComponent implements OnInit {
       (response) => {
 
         this.Messages = response.json();
-        console.log(this.Messages);
+        //console.log(this.Messages);
       }
 
     )

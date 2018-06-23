@@ -71,8 +71,8 @@ export class SearchComponent implements OnInit {
     let date = this.miniSearchForm.get('date').value;
 
     if (date) {
-      formData.append('beginDate', date.beginJsDate.toISOString()),
-        formData.append('endDate', date.endJsDate.toISOString());
+      formData.append('beginDate', date.beginJsDate),
+        formData.append('endDate', date.endJsDate);
       queryParamsSearch['beginDate'] = date.beginJsDate.toISOString();
       queryParamsSearch['endDate'] = date.endJsDate.toISOString();
 

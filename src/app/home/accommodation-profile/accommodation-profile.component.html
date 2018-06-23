@@ -88,19 +88,29 @@
     </div>
 
     <!-- PRIKAZ KOMENTARA -->
-    <div>
+    <div *ngFor="let rat of rating; let i = index">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <strong>anonymous {{i+1}}</strong>
+        </div>
+        <div class="panel-body">
+          {{rat.content}}
+        </div>
+      </div>
+    </div>
+    <!-- <div>
       <ul id="comments-list" class="comments-list">
         <li>
-          <!-- <div class="comment-main-level"> -->
-          <div *ngFor="let rat of rating" class="comment-box">
-            <div class="comment-content">
-              {{rat.content}}
+          <div class="comment-main-level">
+            <div *ngFor="let rat of rating" class="comment-box">
+              <div class="comment-content">
+                {{rat.content}}
+              </div>
+              <br>
             </div>
-            <br>
           </div>
-          <!-- </div> -->
       </ul>
-    </div>
+    </div> -->
 
 
   </div>
