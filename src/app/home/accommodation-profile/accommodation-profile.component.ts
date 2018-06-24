@@ -69,6 +69,7 @@ export class AccommodationProfileComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
         this.accommodation = data.accommodationProfileResolver;
+        console.log(this.accommodation)
         this.accommodationProfileService.getBusyTerminsFromAccommodationId(this.accommodation.id).subscribe(
           (response) => {
 
@@ -131,6 +132,7 @@ export class AccommodationProfileComponent implements OnInit {
     reservation['accommodation'] = { id: this.accommodation.id }
     reservation['user'] = { id: JSON.parse(localStorage.getItem("loggedUser")).id }
     reservation['rated'] = false;
+    reservation['price'] = this.totalPrice;
 
     var js2xmlparser = require("js2xmlparser");
     let xmlFile = js2xmlparser.parse("reservation", reservation);

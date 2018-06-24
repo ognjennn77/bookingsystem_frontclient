@@ -67,8 +67,8 @@
               <strong>{{accommodation?.accommodationCategory?.name}}</strong>
             </p>
             <!-- DODATNE USLUGE -->
-            <h5 *ngIf="accommodation.additionalServices.length" class="colors">AdditionalServices:
-              <span ngFor="let service of accommodation.additionalServices">{{service}},</span>&nbsp;
+            <h5 *ngIf="accommodation?.additionalServices.length" class="colors">AdditionalServices:
+              <!-- <span ngFor="let service of accommodation?.additionalServices">{{service.name}} ,</span>&nbsp; -->
             </h5>
 
             <div class="form-group">

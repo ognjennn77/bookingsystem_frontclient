@@ -21,8 +21,8 @@ export class AccommodationProfileService {
 
     newReservation(xmlFile: any) {
         const headers = new Headers();
-        headers.append('Content-Type', 'text/xml');
-        headers.append('Accept', 'text/xml');
+        headers.append('Content-Type', 'application/xml');
+        headers.append('Accept', 'application/json');
         let options = new RequestOptions({ headers: headers });
         return this.http.post('http://localhost:8080/api/reservation/new', xmlFile, options);
     }
