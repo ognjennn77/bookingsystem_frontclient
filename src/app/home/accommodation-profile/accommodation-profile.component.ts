@@ -69,7 +69,7 @@ export class AccommodationProfileComponent implements OnInit {
     this.route.data.subscribe(
       (data: Data) => {
         this.accommodation = data.accommodationProfileResolver;
-        console.log(this.accommodation)
+        // console.log(this.accommodation)
         this.accommodationProfileService.getBusyTerminsFromAccommodationId(this.accommodation.id).subscribe(
           (response) => {
 
