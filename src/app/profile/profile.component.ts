@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Message } from '../model/message.model';
 import { Rating } from '../model/rating.model';
+import { UploadFileService } from '../upload-file.service';
 
 declare var require: any;
 
@@ -32,11 +33,20 @@ export class ProfileComponent implements OnInit {
   emailE: boolean;
   phoneE: boolean;
   cityE: boolean;
+  usernameC: string = "";
+  firstnameC: string = "";
+  lastnameC: string = "";
+  emailC: string = "";
+  phoneC: string = "";
+  cityC: string = "";
   editE: boolean;
   saveE: boolean;
   changeE: boolean;
   cc: boolean = true;
   imgChanged: boolean = false;
+  files: FileList;
+  fileToUpload: File = null;
+  imgId: number = -1;
 
   modalRef: BsModalRef;
   newMessageForm: FormGroup;
@@ -59,7 +69,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild('myModalClose') myModalClose: ElementRef;
   @ViewChild('datatable') table;
 
-  constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService) {
+  constructor(private profileService: ProfileService, private route: ActivatedRoute, private modalService: BsModalService,private fileUploadService: UploadFileService) {
     this.usernameE = false;
     this.firstnameE = false;
     this.lastnameE = false;
@@ -72,9 +82,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+
+
     this.route.data.subscribe(
       (data: Data) => {
         this.user = data.profileResolver;
+        // console.log(this.user);
+        // console.log(this.user.phoneNumber);
         try {
           if ((this.user.image.image === null) || (this.user.image.image === "")) { }
           else
@@ -85,13 +100,15 @@ export class ProfileComponent implements OnInit {
           e.message;
         }
 
+
         this.profileService.getReservationForUser(this.user.id).subscribe(
           (response) => {
             try {
+              // console.log(response);
               this.res = response.json();
               this.usrs = [];
 
-
+              // console.log(this.res);
               this.res.forEach(element => {
                 var keepGoing = true;
                 // console.log(element.accommodation.agent);
@@ -114,7 +131,6 @@ export class ProfileComponent implements OnInit {
               // console.log(this.usrs);
             }
             catch (e) {
-              console.log(e);
               e.message;
             }
           }
@@ -203,6 +219,20 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  preview(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        this.user.image.image = event.target.result;
+      }
+
+      reader.readAsDataURL(event.target.files[0]);
+      this.files = event.target.files;
+      this.fileToUpload = this.files.item(0);
+    }
+  }
+
   edit() {
     this.usernameE = true;
     this.firstnameE = true;
@@ -226,7 +256,42 @@ export class ProfileComponent implements OnInit {
     this.saveE = true;
     this.changeE = true;
 
+    let userC = {};
+    userC['username'] = this.user.username;
+    userC['password'] = this.user.password;
+    userC['email'] = this.user.email;
+    userC['firstName'] = this.user.firstName;
+    userC['lastName'] = this.user.lastName;
+    userC['city'] = this.user.city;
+    userC['phoneNumber'] = this.user.phoneNumber;
+    userC['role'] = this.user.role;
+
+    console.log(userC);
+    var js2xmlparser = require("js2xmlparser");
+    let xmlFile = js2xmlparser.parse("abstractuser", userC);
+    if (this.fileToUpload != null)
+      this.uploadFileToActivity(xmlFile);
+    else
+      this.profileService.updateUser(xmlFile, Number(-1).toString(),Number(JSON.parse(localStorage.getItem("loggedUser")).id).toString()).subscribe(
+        (response) => { }
+      )
+
+    console.log(userC);
+
     location.reload();
+  }
+
+  uploadFileToActivity(xmlFile: any) {
+    this.fileUploadService.postFile(this.fileToUpload).subscribe(data => {
+      this.imgId = data;
+      console.log(data)
+      this.profileService.updateUser(xmlFile, this.imgId.toString(),Number(JSON.parse(localStorage.getItem("loggedUser")).id).toString()).subscribe(
+        (response) => { }
+      )
+
+    }, error => {
+      console.log(error);
+    });
   }
 
   openModal(template: TemplateRef<any>) {

@@ -58,4 +58,17 @@ export class ProfileService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post("http://localhost:8080/api/inbox/newmessage/" + resId, xmlFile, options);
     }
+
+    updateUser(xmlFile: any, usrId: string, imgId: string) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'text/xml');
+        headers.append('Accept', 'text/xml');
+        let options = new RequestOptions({ headers: headers });
+        // let body = '<request>'
+        // '<username>Username</username>'
+        // '<password>Password</password>'
+        // '</request>';
+        console.log(xmlFile)
+            return this.http.post('http://localhost:8080/api/abstractUser/update/' + imgId + '/' + usrId, xmlFile, options);
+    }
 }

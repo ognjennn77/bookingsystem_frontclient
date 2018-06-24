@@ -33,7 +33,7 @@
                   <img alt="User Pic" [src]="image" id="profile-image1" class="img-circle img-responsive">
 
                   <input id="profile-image-upload" class="hidden" type="file">
-                  <div [hidden]="changeE" style="color:#999;">click here to change profile image</div>
+                  <div [hidden]="changeE" style="color:#999;"><input accept="image/*" (change)="preview($event)" type="file"/>click here to change profile image</div>
                   <!--Upload Image Js And Css-->
 
 
@@ -59,40 +59,41 @@
               <div class="clearfix"></div>
               <hr style="margin:5px 0 5px 0;">
 
+              <!-- <form  role="form"> -->
               <div class="col-sm-5 col-xs-6 tital ">Username:</div>
-              <div [attr.contenteditable]="usernameE" class="col-sm-7 col-xs-6 ">{{user.username}}</div>
+              <input style="border: none;border-color: transparent;" [readonly]="!usernameE" [(ngModel)]="user.username"  class="col-sm-7 col-xs-6" value="{{user.username}}">
               <div class="clearfix"></div>
               <div class="bot-border"></div>
               <div class="col-sm-5 col-xs-6 tital ">First Name:</div>
-              <div [attr.contenteditable]="firstnameE" class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
+              <input style="border: none;border-color: transparent;" [readonly]="!firstnameE" [(ngModel)]="user.firstName" class="col-sm-7 col-xs-6" value="{{user.firstName}}">
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
 
               <div class="col-sm-5 col-xs-6 tital ">Last Name:</div>
-              <div [attr.contenteditable]="lastnameE" class="col-sm-7"> {{user.lastName}}</div>
+              <input style="border: none;border-color: transparent;" [readonly]="!lastnameE"  [(ngModel)]="user.lastName" class="col-sm-7 col-xs-6" value="{{user.lastName}}">
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
 
 
               <div class="col-sm-5 col-xs-6 tital ">Email adress:</div>
-              <div [attr.contenteditable]="emailE" class="col-sm-7">{{user.email}}</div>
+              <input style="border: none;border-color: transparent;" [readonly]="!emailE" [(ngModel)]="user.email" class="col-sm-7 col-xs-6" value="{{user.email}}">
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
 
 
               <div class="col-sm-5 col-xs-6 tital ">Phone number:</div>
-              <div [attr.contenteditable]="phoneE" class="col-sm-7">{{user.phoneNumber}}</div>
+              <input style="border: none;border-color: transparent;" [readonly]="!phoneE" [(ngModel)]="user.phoneNumber" class="col-sm-7 col-xs-6" value="{{user.phoneNumber}}">
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
 
 
               <div class="col-sm-5 col-xs-6 tital ">City:</div>
-              <div [attr.contenteditable]="cityE" class="col-sm-7">{{user.city}}</div>
-
+              <input style="border: none;border-color: transparent;" [readonly]="!cityE" [(ngModel)]="user.city" class="col-sm-7 col-xs-6" value="{{user.city}}">
+            <!-- </form> -->
 
 
 

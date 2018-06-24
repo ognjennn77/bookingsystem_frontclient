@@ -9,7 +9,7 @@ export class User{
         public firstName : string,
         public lastName :string,
         public city : string,
-        public phone : string,
+        public phoneNumber : string,
         public role : string,
         public active?: any,
         public image? : Image
