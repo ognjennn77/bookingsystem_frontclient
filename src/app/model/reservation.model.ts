@@ -8,6 +8,6 @@ export class Reservation {
         public user?: User,
         public accommodation?: Accommodation,
         public rated?: Boolean,
-        public price?: number
+        public price?: number,
     ) { }
 }
